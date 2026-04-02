@@ -38,6 +38,21 @@ SORT file.mtime DESC
 LIMIT 10
 ```
 
+## Writing
+### 下書き中
+```dataview
+TABLE genre, file.mtime AS "最終更新"
+FROM "Writing/drafts"
+SORT file.mtime DESC
+```
+
+### 公開済み
+```dataview
+TABLE genre, file.mtime AS "公開日"
+FROM "Writing/published"
+SORT file.mtime DESC
+```
+
 ## Maps of Content
 - [[Maps/index|All Maps]]
 
