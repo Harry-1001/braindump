@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>国語力トレーニング</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif;
+      background: #f5f4f0;
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 0.82rem;
+      color: #888;
+      margin-bottom: 36px;
+    }
+
+    .section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 16px;
+    }
+
+    /* Habits */
+    .habit-list {
+      list-style: none;
+    }
+
+    .habit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .habit-item:last-child { border-bottom: none; }
+
+    .habit-item input[type="checkbox"] {
+      margin-top: 2px;
+      width: 17px;
+      height: 17px;
+      accent-color: #1a1a1a;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .habit-text {
+      flex: 1;
+    }
+
+    .habit-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .habit-desc {
+      font-size: 0.78rem;
+      color: #777;
+      margin-top: 2px;
+      line-height: 1.5;
+    }
+
+    .habit-item.done .habit-title {
+      text-decoration: line-through;
+      color: #bbb;
+    }
+
+    .habit-item.done .habit-desc {
+      color: #ccc;
+    }
+
+    .freq-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      background: #f0f0ee;
+      color: #888;
+      border-radius: 4px;
+      padding: 2px 7px;
+      white-space: nowrap;
+      margin-top: 3px;
+      align-self: flex-start;
+      flex-shrink: 0;
+    }
+
+    /* Books */
+    .book-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .book-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .book-meta {
+      flex: 1;
+    }
+
+    .book-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .book-author {
+      font-size: 0.75rem;
+      color: #999;
+      margin-top: 1px;
+    }
+
+    .book-priority {
+      font-size: 0.65rem;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 3px 9px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .priority-must {
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .priority-next {
+      background: #e8e8e8;
+      color: #555;
+    }
+
+    .book-divider {
+      height: 1px;
+      background: #f0f0f0;
+    }
+
+    /* Principle */
+    .principle-block {
+      background: #f7f6f2;
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .principle-block strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: #1a1a1a;
+    }
+
+    .principle-block ul {
+      padding-left: 1.2em;
+    }
+
+    .principle-block li {
+      margin-bottom: 6px;
+    }
+
+    /* Reset button */
+    .reset-btn {
+      display: block;
+      margin: 0 auto;
+      margin-top: 8px;
+      background: none;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 8px 24px;
+      font-size: 0.78rem;
+      color: #999;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .reset-btn:hover { border-color: #aaa; color: #555; }
+
+    .date-display {
+      font-size: 0.75rem;
+      color: #bbb;
+      text-align: right;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <h1>国語力トレーニング</h1>
+  <p class="subtitle">構造を鍛える。語彙はあとからついてくる。</p>
+
+  <div class="date-display" id="dateDisplay"></div>
+
+  <!-- Daily Habits -->
+  <div class="section">
+    <div class="section-label">Daily Habits</div>
+    <ul class="habit-list" id="habitList">
+
+      <li class="habit-item" data-id="h1">
+        <input type="checkbox" id="h1">
+        <div class="habit-text">
+          <div class="habit-title">話す前に一文で結論を作る</div>
+          <div class="habit-desc">会議・1on1の前に「自分の主張は何か」を一文にしてから口を開く。PREP（結論→理由→例→結論）を内面化する。</div>
+        </div>
+        <div class="freq-badge">毎回</div>
+      </li>
+
+      <li class="habit-item" data-id="h2">
+        <input type="checkbox" id="h2">
+        <div class="habit-text">
+          <div class="habit-title">記事・本を200字で要約する</div>
+          <div class="habit-desc">読んだものを「主張は何か」に圧縮する。書けない＝まだ理解していない証拠。</div>
+        </div>
+        <div class="freq-badge">週3</div>
+      </li>
+
+      <li class="habit-item" data-id="h3">
+        <input type="checkbox" id="h3">
+        <div class="habit-text">
+          <div class="habit-title">Slack/メールを構造化してから送る</div>
+          <div class="habit-desc">結論→根拠→詳細の順で書いているか確認してから送信する。Wanderlustの発信がそのまま訓練場。</div>
+        </div>
+        <div class="freq-badge">毎日</div>
+      </li>
+
+      <li class="habit-item" data-id="h4">
+        <input type="checkbox" id="h4">
+        <div class="habit-text">
+          <div class="habit-title">日経 or 東洋経済を1本読む</div>
+          <div class="habit-desc">接続詞（したがって/一方で/つまり）に注目して読む。記事構造＝ビジネス語彙の自然習得。</div>
+        </div>
+        <div class="freq-badge">週3</div>
+      </li>
+
+      <li class="habit-item" data-id="h5">
+        <input type="checkbox" id="h5">
+        <div class="habit-text">
+          <div class="habit-title">読んだ本・記事を誰かに口頭で説明する</div>
+          <div class="habit-desc">人に話すことで「整理できていない部分」が露わになる。話せない＝構造になっていない。</div>
+        </div>
+        <div class="freq-badge">週1</div>
+      </li>
+
+    </ul>
+    <button class="reset-btn" onclick="resetHabits()">リセット</button>
+  </div>
+
+  <!-- Books -->
+  <div class="section">
+    <div class="section-label">読む本リスト</div>
+    <div class="book-grid">
+
+      <div class="book-item">
+        <div class="book-meta">
+          <div class="book-title">考える技術・書く技術</div>
+          <div class="book-author">バーバラ・ミント — ピラミッド原則</div>
+        </div>
+        <span class="book-priority priority-must">最優先</span>
+      </div>
+
+      <div class="book-divider"></div>
+
+      <div class="book-item">
+        <div class="book-meta">
+          <div class="book-title">ロジカルシンキング</div>
+          <div class="book-author">照屋華子・岡田恵子 — MECE / So What / Why So</div>
+        </div>
+        <span class="book-priority priority-must">最優先</span>
+      </div>
+
+      <div class="book-divider"></div>
+
+      <div class="book-item">
+        <div class="book-meta">
+          <div class="book-title">日本語の作文技術</div>
+          <div class="book-author">本多勝一 — 文の設計・修飾の順序</div>
+        </div>
+        <span class="book-priority priority-must">最優先</span>
+      </div>
+
+      <div class="book-divider"></div>
+
+      <div class="book-item">
+        <div class="book-meta">
+          <div class="book-title">イシューからはじめよ</div>
+          <div class="book-author">安宅和之 — 問いの構造設計</div>
+        </div>
+        <span class="book-priority priority-next">次</span>
+      </div>
+
+      <div class="book-divider"></div>
+
+      <div class="book-item">
+        <div class="book-meta">
+          <div class="book-title">理科系の作文技術</div>
+          <div class="book-author">木下是雄 — 一文一義・曖昧さの排除</div>
+        </div>
+        <span class="book-priority priority-next">次</span>
+      </div>
+
+      <div class="book-divider"></div>
+
+      <div class="book-item">
+        <div class="book-meta">
+          <div class="book-title">語彙力こそが教養である</div>
+          <div class="book-author">齋藤孝 — 語彙を概念の棚として持つ</div>
+        </div>
+        <span class="book-priority priority-next">次</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Core Principle -->
+  <div class="section">
+    <div class="section-label">Core Principle</div>
+    <div class="principle-block">
+      <strong>国語力は構造だ</strong>
+      語彙は「弾薬の量」、構造は「銃の設計」。
+      弾だけあっても当たらないし、設計がよくても弾がなければ威力が出ない。
+      <br><br>
+      構造を鍛えるとは：
+      <ul>
+        <li>主張を一文で言えるか</li>
+        <li>論理の接続が「だから」か「しかし」か意識できているか</li>
+        <li>抽象と具体を意図的に往復できているか</li>
+        <li>話題の粒度が揃っているか</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Date display
+  const d = new Date();
+  document.getElementById('dateDisplay').textContent =
+    `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
+
+  // Load state from localStorage
+  const STORAGE_KEY = 'kokugoryoku_habits';
+  const DATE_KEY = 'kokugoryoku_date';
+
+  function getTodayStr() {
+    const d = new Date();
+    return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+  }
+
+  function loadState() {
+    const savedDate = localStorage.getItem(DATE_KEY);
+    const today = getTodayStr();
+    if (savedDate !== today) {
+      // New day — reset
+      localStorage.setItem(DATE_KEY, today);
+      localStorage.removeItem(STORAGE_KEY);
+      return {};
+    }
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+
+  function saveState(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function applyState(state) {
+    document.querySelectorAll('.habit-item').forEach(item => {
+      const id = item.dataset.id;
+      const cb = item.querySelector('input[type="checkbox"]');
+      if (state[id]) {
+        cb.checked = true;
+        item.classList.add('done');
+      } else {
+        cb.checked = false;
+        item.classList.remove('done');
+      }
+    });
+  }
+
+  let state = loadState();
+  applyState(state);
+
+  document.querySelectorAll('.habit-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (e.target.tagName === 'INPUT') return; // handled separately
+      const cb = item.querySelector('input[type="checkbox"]');
+      cb.checked = !cb.checked;
+      toggleItem(item, cb.checked);
+    });
+    item.querySelector('input').addEventListener('change', (e) => {
+      toggleItem(item, e.target.checked);
+    });
+  });
+
+  function toggleItem(item, checked) {
+    const id = item.dataset.id;
+    if (checked) { item.classList.add('done'); state[id] = true; }
+    else { item.classList.remove('done'); delete state[id]; }
+    saveState(state);
+  }
+
+  function resetHabits() {
+    state = {};
+    saveState(state);
+    applyState(state);
+  }
+</script>
+</body>
+</html>

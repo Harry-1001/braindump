@@ -31,6 +31,13 @@ tags: [topic/<name>, status/planned]
 3. `/deep-research` — fills in notes/ and references/
 4. `/deep-suggest` — suggests follow-up directions (read-only)
 
+## Output Format
+- `/deep-research` のアウトプットは **MD と HTML の両方** を出力する
+- ファイル名の先頭に作成日を `YYYYMMDD_` 形式で付ける
+  - 例：`20260402_recruit-hd-analysis.html`、`20260402_recruit-hd-summary.md`
+- HTMLは参照HTMLのデザインシステム（モノクロ、editorial調）に準拠する
+- 両ファイルともトピックフォルダ直下に配置する
+
 ## Rules
 - Use the topic template in `Templates/` when creating new topics
 - Always link to related topics with `[[wikilinks]]`

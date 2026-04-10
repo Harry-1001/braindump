@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI博覧会 Spring 2026 — 出展社リサーチ</title>
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #151820;
+    --surface2: #1e2230;
+    --border: #2a2f3f;
+    --text: #e2e8f0;
+    --muted: #8892a4;
+    --accent: #6366f1;
+
+    --cat-physical: #f97316;
+    --cat-agent: #6366f1;
+    --cat-genai: #10b981;
+    --cat-reskill: #f59e0b;
+    --cat-voice: #ec4899;
+    --cat-other: #64748b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0d0f14 0%, #1a1040 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 32px 32px;
+    text-align: center;
+  }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #818cf8, #c084fc, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  /* ── FILTER BAR ── */
+  .filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 24px 32px;
+    position: sticky;
+    top: 0;
+    background: rgba(13,15,20,0.95);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+  }
+  .filter-btn {
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { border-color: #4a5068; color: var(--text); }
+  .filter-btn.active { color: #fff; border-color: transparent; }
+  .filter-btn[data-cat="all"].active { background: var(--accent); }
+  .filter-btn[data-cat="physical"].active { background: var(--cat-physical); }
+  .filter-btn[data-cat="agent"].active { background: var(--cat-agent); }
+  .filter-btn[data-cat="genai"].active { background: var(--cat-genai); }
+  .filter-btn[data-cat="reskill"].active { background: var(--cat-reskill); }
+  .filter-btn[data-cat="voice"].active { background: var(--cat-voice); }
+  .filter-btn[data-cat="other"].active { background: var(--cat-other); }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 20px;
+    padding: 28px 32px 64px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+  .card.hidden { display: none; }
+
+  .card-header {
+    padding: 20px 20px 14px;
+    border-left: 4px solid var(--cat-color, var(--accent));
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    background: color-mix(in srgb, var(--cat-color, var(--accent)) 20%, transparent);
+  }
+  .card-title-area { flex: 1; }
+  .card-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .cat-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    background: color-mix(in srgb, var(--cat-color, var(--accent)) 25%, transparent);
+    color: var(--cat-color, var(--accent));
+  }
+
+  .card-body {
+    padding: 0 20px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .desc { color: var(--text); font-size: 0.84rem; }
+
+  .tech-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .chip {
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    background: var(--surface2);
+    color: #94a3b8;
+    border: 1px solid var(--border);
+  }
+
+  /* founder panel */
+  .founder-toggle {
+    width: 100%;
+    background: var(--surface2);
+    border: none;
+    border-top: 1px solid var(--border);
+    padding: 10px 20px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .founder-toggle:hover { background: #252a38; color: var(--text); }
+  .founder-toggle .arrow { transition: transform 0.25s; display: inline-block; }
+  .founder-toggle.open .arrow { transform: rotate(90deg); }
+
+  .founder-panel {
+    display: none;
+    background: #12151f;
+    border-top: 1px solid var(--border);
+    padding: 16px 20px;
+  }
+  .founder-panel.open { display: block; }
+
+  .founder-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .founder-role {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .founder-bio {
+    font-size: 0.81rem;
+    color: #a8b3c4;
+    line-height: 1.65;
+  }
+  .founder-quote {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-left: 3px solid var(--cat-color, var(--accent));
+    background: color-mix(in srgb, var(--cat-color, var(--accent)) 8%, transparent);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #c8d0dc;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .kpi-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .kpi {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+  .kpi strong { display: block; font-size: 1rem; color: var(--text); }
+  .kpi span { color: var(--muted); }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* section heading */
+  .section-divider {
+    grid-column: 1 / -1;
+    padding: 8px 0 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .trend-box {
+    grid-column: 1 / -1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 28px;
+  }
+  .trend-box h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .trend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .trend-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .trend-item h4 { font-size: 0.84rem; font-weight: 700; margin-bottom: 4px; color: #c084fc; }
+  .trend-item p { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+
+  @media (max-width: 600px) {
+    .grid { padding: 16px; gap: 14px; }
+    header { padding: 32px 16px 24px; }
+    header h1 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AI博覧会 Spring 2026 — 出展社リサーチ</h1>
+  <p>2026-04-08 調査 ／ 技術詳細 + 創業者プロフィール付き</p>
+</header>
+
+<div class="filters">
+  <button class="filter-btn active" data-cat="all">すべて</button>
+  <button class="filter-btn" data-cat="physical">フィジカルAI・ロボット</button>
+  <button class="filter-btn" data-cat="agent">AIエージェント</button>
+  <button class="filter-btn" data-cat="genai">生成AI</button>
+  <button class="filter-btn" data-cat="reskill">AI研修・リスキリング</button>
+  <button class="filter-btn" data-cat="voice">音声系</button>
+  <button class="filter-btn" data-cat="other">その他AIサービス</button>
+</div>
+
+<div class="grid" id="grid">
+
+<!-- ═══ TREND BOX ═══ -->
+<div class="trend-box" id="trend-box">
+  <h3>2026年 横断トレンド</h3>
+  <div class="trend-grid">
+    <div class="trend-item">
+      <h4>エージェント化の加速</h4>
+      <p>チャットボット → コパイロット → 自律実行型エージェントへ。LayerX・PeopleX・JAPAN AI・Gen-AXが一斉に「完全自動化」を掲げる段階に到達。</p>
+    </div>
+    <div class="trend-item">
+      <h4>ドメイン特化 vs 汎用LLMラッパー</h4>
+      <p>FRONTEOのKIBIT（数学的アプローチ）やシナモンのFlax Scanner（独自OCR）は、LLMとは異なる設計で深く特定領域に刺さる戦略。Exa Enterprise AIは複数LLMのラッパーで使いやすさを売る戦略。</p>
+    </div>
+    <div class="trend-item">
+      <h4>Physical AI元年</h4>
+      <p>Highlanders（ヒューマノイド）への注目が急上昇。2026年は業界全体で「AIが物理世界に出ていく年」として認識されている。</p>
+    </div>
+    <div class="trend-item">
+      <h4>音声のマルチモーダル化</h4>
+      <p>ElevenLabsが音声→動画・画像へ拡張。モダリティの壁が溶けつつあり、音声プラットフォームがコンテンツスタジオへ進化中。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     フィジカルAI・ロボット
+══════════════════════════════════════════════ -->
+
+<!-- Highlanders -->
+<div class="card" data-cat="physical" style="--cat-color: var(--cat-physical)">
+  <div class="card-header">
+    <div class="card-icon">🤖</div>
+    <div class="card-title-area">
+      <div class="card-name">Highlanders</div>
+      <span class="cat-badge">フィジカルAI・ロボット</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">東京大学発のロボットスタートアップ（2023年設立）。国産AIヒューマノイドと4足歩行ロボットを開発。ハード・ソフト完全自社開発。</p>
+    </div>
+    <div>
+      <div class="section-label">主力プロダクト</div>
+      <p class="desc"><strong style="color:#f97316">HL Human</strong>（19自由度AIヒューマノイド）— 生成AI × 自然言語インターフェース。2025年Q4プロト → 2026年量産販売。製造・物流・インフラ・災害支援向け。<br><br><strong style="color:#f97316">HLQ Pro</strong>（4足歩行ロボット）— 独自AIウォーキングアルゴリズムでリアルタイム地形解析。消防・プラント保守など過酷環境向け。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">強化学習ベースロボット制御</span>
+        <span class="chip">生成AI統合</span>
+        <span class="chip">自然言語インターフェース</span>
+        <span class="chip">モジュラー設計</span>
+        <span class="chip">リアルタイム地形解析</span>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><strong>2023</strong><span>設立年</span></div>
+      <div class="kpi"><strong>23名</strong><span>エンジニア（東大系）</span></div>
+      <div class="kpi"><strong>2026</strong><span>量産販売予定</span></div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者・CEOについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">上原 昇馬（うえはら しょうま）</div>
+    <div class="founder-role">代表取締役CEO（2025年7月就任）</div>
+    <p class="founder-bio">
+      大阪大学卒業後、東京大学大学院でロボット研究を修了。JST STARTプログラムの研究ディレクター、大阪大学総長賞受賞、日本学術振興会特別研究員（DC-1）に選定。TRUST SMITH CTO・RENATUS ROBOTICS CIOを経て、NEDOのDTSUプロジェクト研究ディレクターとして大規模産業用ロボットシステム開発に従事。2025年7月にHighlanders CEOに就任。
+    </p>
+    <div class="founder-quote">
+      「Physical AIは、AIが会話するだけでなく、身体を持って物理世界で動く段階へ進む。日本のロボット大国としての地位をAI時代にアップデートする。」
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     AIエージェント
+══════════════════════════════════════════════ -->
+
+<!-- LayerX -->
+<div class="card" data-cat="agent" style="--cat-color: var(--cat-agent)">
+  <div class="card-header">
+    <div class="card-icon">⚡</div>
+    <div class="card-title-area">
+      <div class="card-name">LayerX</div>
+      <span class="cat-badge">AIエージェント</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">バックオフィスDX（Bakuraku）・LLMエージェント（Ai Workforce）・Fintech（Alterna）の3事業。2026年3月ARR100億円達成。シリーズBで150億円調達。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#818cf8">Bakuraku</strong>：経費精算・請求書受領・勤怠・給与計算を自律AIエージェントで自動化。1.5万社以上導入。<br><br><strong style="color:#818cf8">Ai Workforce</strong>：汎用LLMツールでなく、企業課題特化の独自生成AIプラットフォーム。「業務の完全自動運転（レベル5）」を目標。2025年に20以上のAIエージェントをリリース。研究エージェント・コーディングエージェントを積極活用。<br><br><strong style="color:#818cf8">Fintech</strong>：三井物産との合弁「Alterna」で17本デジタル証券ファンド、累計投資額250億円超。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">LLM Fine-tuning</span>
+        <span class="chip">AIエージェント</span>
+        <span class="chip">ワークフロー自動化</span>
+        <span class="chip">デジタル証券</span>
+        <span class="chip">OCR + AI照合</span>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><strong>ARR 100億</strong><span>2026年3月達成</span></div>
+      <div class="kpi"><strong>150億円</strong><span>シリーズB調達額</span></div>
+      <div class="kpi"><strong>1.5万社+</strong><span>Bakuraku導入</span></div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者・CEOについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">福島 良典（ふくしま よしのり）</div>
+    <div class="founder-role">代表取締役CEO / 連続起業家</div>
+    <p class="founder-bio">
+      1988年愛知県生まれ。東京大学大学院工学系研究科（コンピュータサイエンス・機械学習）在籍中の2012年、Gunosyを共同創業。2.5年でマザーズ上場、後に東証一部へ。Forbes Asia「Under 30」に2016年選出。2018年LayerXを設立しCEOに就任。ブロックチェーン → 業務DX → AIエージェントへと事業軸を大胆に転換し続ける連続起業家。
+    </p>
+    <div class="founder-quote">
+      「99%にノーを突きつけられても折れない覚悟が起業家には必要。自分が正しいと思う方向へ、逆張りを恐れずに進む。」
+    </div>
+  </div>
+</div>
+
+<!-- PeopleX -->
+<div class="card" data-cat="agent" style="--cat-color: var(--cat-agent)">
+  <div class="card-header">
+    <div class="card-icon">👥</div>
+    <div class="card-title-area">
+      <div class="card-name">PeopleX</div>
+      <span class="cat-badge">AIエージェント</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">HRドメインの自律型AIエージェントプラットフォーム。採用から育成・組織開発まで、人事業務全般をAIが自律的に担う。2024年創業。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#818cf8">AgenticHR Platform</strong>：AIが自律的に人事課題を特定し解決策まで提案。従来のHR SaaSとは根本的に異なる設計（2026年3月正式発表）。<br><br><strong style="color:#818cf8">AI面接 / AIロープレ</strong>：対話型AIが採用・育成プロセスを自動化。<br><br><strong style="color:#818cf8">AI上司</strong>：週次でタスク可視化・業務改善フィードバック・ストレスチェックを自動実施。試験的に社内全員へ展開済み。<br><br><strong style="color:#818cf8">AI Copilot for 人材紹介</strong>：人材紹介業務の全工程をAIが代行。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">Agentic AI</span>
+        <span class="chip">対話型AI面接</span>
+        <span class="chip">エンゲージメントサーベイAI</span>
+        <span class="chip">自律ワークフロー</span>
+      </div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者・CEOについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">橘 大地（たちばな だいち）</div>
+    <div class="founder-role">代表取締役CEO</div>
+    <p class="founder-bio">
+      東京大学法科大学院卒業、弁護士資格取得後、サイバーエージェントおよびGVA法律事務所にて企業法務に従事。2015年に弁護士ドットコムへ入社し、クラウド契約サービス「クラウドサイン」の事業責任者として急成長を牽引。その後、執行役員・取締役に就任。2024年、弁護士ドットコム取締役を退任してPeopleXを創業。
+    </p>
+    <div class="founder-quote">
+      「仕事は終わりなき長距離走。信頼関係と偶然の出会いを大切に、中長期で信頼される経営者でありたい。」
+    </div>
+  </div>
+</div>
+
+<!-- Findy -->
+<div class="card" data-cat="agent" style="--cat-color: var(--cat-agent)">
+  <div class="card-header">
+    <div class="card-icon">🔍</div>
+    <div class="card-title-area">
+      <div class="card-name">ファインディ（Findy）</div>
+      <span class="cat-badge">AIエージェント</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">エンジニア採用・組織のAIプラットフォーム。転職・フリーランス・開発組織可視化・ツールレビュー・カンファレンスの5サービス展開。2025年5月シリーズDで20.5億円調達（累計43億円）。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#818cf8">Findy Team+</strong>：GitHubなどの開発データを解析し、チームごとのAI活用度・ボトルネックを可視化する開発組織SaaS。<br><br><strong style="color:#818cf8">Findy AI+</strong>：人とAIの協働状態を実現するプラットフォーム。個人・チームレベルでのAI活用ベストプラクティスを可視化。<br><br>社内エンジニアの8割以上がClaude Code・GitHub Copilot・Devinを日常利用。自社がAI活用のロールモデルとして機能している。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">GitHub API解析</span>
+        <span class="chip">エンジニアスキルスコアリング</span>
+        <span class="chip">AI活用度可視化</span>
+        <span class="chip">Claude Code</span>
+        <span class="chip">Devin</span>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><strong>20.5億円</strong><span>シリーズD（2025年5月）</span></div>
+      <div class="kpi"><strong>80%+</strong><span>社内エンジニアのAI利用率</span></div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者・CEOについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">山田 裕一朗（やまだ ゆういちろう）</div>
+    <div class="founder-role">代表取締役CEO</div>
+    <p class="founder-bio">
+      リクルートグループのHRテック領域でキャリアを積んだ後、エンジニアの市場価値を正しく評価する仕組みが日本に不足していると感じてFindyを創業。エンジニアコミュニティへの深い理解と、採用市場のデータ活用を組み合わせたプロダクト設計が特徴。グローバル展開も積極的に進めている。
+    </p>
+    <div class="founder-quote">
+      「エンジニアが正しく評価される世界をつくる。スキルデータと市場をつなぐことで、日本の開発力を底上げしたい。」
+    </div>
+  </div>
+</div>
+
+<!-- FRONTEO -->
+<div class="card" data-cat="agent" style="--cat-color: var(--cat-agent)">
+  <div class="card-header">
+    <div class="card-icon">🧠</div>
+    <div class="card-title-area">
+      <div class="card-name">FRONTEO</div>
+      <span class="cat-badge">AIエージェント</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">独自AIエンジン「KIBIT」でリーガル・医療・経済安保に特化。LLMとは根本的に異なる数学的アプローチが核心。上場企業。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#818cf8">KIBIT（固有技術）</strong>：「すべての現象は数式で表現できる」という思想に基づき、統計的手法で自然言語を解析。大量テキストから専門家の暗黙知を再現し「発見」を導く。トランスフォーマーとは異なるアーキテクチャ。ハルシネーションが原理的に起きにくい。<br><br><strong style="color:#818cf8">主な適用</strong>：電子証拠開示（リーガルディスカバリー）、創薬支援「Drug Discovery AI Factory」、論文探索AI「KIBIT Amanogawa」、経済安保インテリジェンス分析。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">独自NLP（非Transformer）</span>
+        <span class="chip">数学的テキスト解析</span>
+        <span class="chip">eDiscovery</span>
+        <span class="chip">創薬AI</span>
+        <span class="chip">論文探索AI</span>
+        <span class="chip">経済安保分析</span>
+      </div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者・CEOについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">守本 正宏（もりもと まさひろ）</div>
+    <div class="founder-role">代表取締役社長 / 創業者</div>
+    <p class="founder-bio">
+      1966年生まれ。防衛大学校（電気工学）卒業後、宇宙飛行士を志すが視力低下で断念。海上自衛隊幹部を経て1994年退官。アプライドマテリアルズジャパンでテクノロジーマネージャーとして半導体業界を経験。グローバル展開する日本企業が海外訴訟で証拠開示できないという問題を知り、2003年にFRONTEO（当時：ユニバーサル・ビジネス・インキュベーターズ）を創業。自衛官→外資→AI起業という異色のキャリア。
+    </p>
+    <div class="founder-quote">
+      「社長はとにかく逃げたらだめ。20年やり抜く覚悟で日本にないサービスをつくってきた。自衛官時代の精神が今も根底にある。」
+    </div>
+  </div>
+</div>
+
+<!-- MILIZE -->
+<div class="card" data-cat="agent" style="--cat-color: var(--cat-agent)">
+  <div class="card-header">
+    <div class="card-icon">💹</div>
+    <div class="card-title-area">
+      <div class="card-name">MILIZE（ミライズ）</div>
+      <span class="cat-badge">AIエージェント</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">金融工学 × AI × Fintechの老舗スタートアップ（2009年設立）。「テクノロジーで金融を民主化する」をミッションに、個人の資産意思決定とFP（ファイナンシャルプランナー）支援を提供。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#818cf8">milize</strong>（2025年9月開始）：個人の資産・ライフプランの意思決定を支援する金融アドバイザリープラットフォーム。<br><br><strong style="color:#818cf8">milize Pro</strong>：FP向けライフプランシミュレーション + AIアドバイス機能。<br><br><strong style="color:#818cf8">milize.ai</strong>（2026年4月β）：SmythOS連携の企業向けAI統合プラットフォーム。AI資産の蓄積・高度化を実現。<br><br>横浜フィナンシャルグループと資本業務提携（2026年1月）、NamiTech（音声AI）と戦略提携（2025年12月）。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">金融工学モデル</span>
+        <span class="chip">ライフプランシミュレーション</span>
+        <span class="chip">SmythOS連携</span>
+        <span class="chip">AIアドバイザリー</span>
+        <span class="chip">デリバティブ分析</span>
+      </div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者・CEOについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">田中 徹（たなか とおる）</div>
+    <div class="founder-role">代表取締役 / 創業者</div>
+    <p class="founder-bio">
+      旧富士銀行（現みずほ銀行）にてデリバティブトレーディング・リスク管理・クレジット投資に従事。米国赴任中にニューヨーク連銀などを担当。金融機関在籍中にコーディングを独学で習得し、その後AFG（旧）・エイファス等の金融ソフトウェア会社を創業。金融の深い知識とエンジニアリング能力を兼ね備えた稀有な起業家。
+    </p>
+    <div class="founder-quote">
+      「誰もが明るい未来を描ける社会へ。金融の専門知識をテクノロジーで民主化し、個人の意思決定を変えたい。」
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     生成AI
+══════════════════════════════════════════════ -->
+
+<!-- Exa Enterprise AI -->
+<div class="card" data-cat="genai" style="--cat-color: var(--cat-genai)">
+  <div class="card-header">
+    <div class="card-icon">🌐</div>
+    <div class="card-title-area">
+      <div class="card-name">Exa Enterprise AI</div>
+      <span class="cat-badge">生成AI</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">エクサウィザーズから2023年10月に分社設立。企業向け生成AIプラットフォーム「exaBase」で1,000社・10万ユーザー以上に導入。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#10b981">exaBase 生成AI</strong>：ChatGPT（OpenAI）・Gemini（Google）・Claude（Anthropic）など複数LLMを企業のセキュリティ要件に合わせて統合。20〜30種類のAIエージェントを搭載。業務タスクを効率化する「AIぐるぐるモデル（価値創造モデル）」として設計。Slack連携も計画中。RAG・ファインチューニング・エージェント実装まで一気通貫でサポート。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">マルチLLM統合</span>
+        <span class="chip">RAG</span>
+        <span class="chip">AIエージェント群</span>
+        <span class="chip">エンタープライズセキュリティ</span>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><strong>1,000社+</strong><span>導入企業数</span></div>
+      <div class="kpi"><strong>10万人+</strong><span>利用ユーザー数</span></div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 親会社：エクサウィザーズについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">石山 洸（いしやま こう）</div>
+    <div class="founder-role">エクサウィザーズ 代表取締役社長CEO</div>
+    <p class="founder-bio">
+      リクルートグループでAIビジネスの推進役を務めた後、2016年にエクサウィザーズを共同創業。「AIで産業革命を起こす」をビジョンに、介護・医療・法律などの社会課題領域にAIを実装してきた。Exa Enterprise AIはその生成AIサービス部門を独立させた企業。
+    </p>
+    <div class="founder-quote">
+      「社会課題を解くAIを産業実装すること。大企業との協働でスケールするモデルを追求している。」
+    </div>
+  </div>
+</div>
+
+<!-- データグリッド -->
+<div class="card" data-cat="genai" style="--cat-color: var(--cat-genai)">
+  <div class="card-header">
+    <div class="card-icon">🎨</div>
+    <div class="card-title-area">
+      <div class="card-name">データグリッド</div>
+      <span class="cat-badge">生成AI</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">京都大学発（2017年）。GAN・拡散モデルを専業とする生成AIのパイオニア。バーチャルヒューマン・製造業不良品検出・建設図面解析の3領域が主軸。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#10b981">Anomaly Generator</strong>：製造業向け不良品画像を大量生成するソフトウェア。実際の不良品が少なくても検査AIを訓練できる合成データ戦略。30社以上の大手製造業に導入。<br><br><strong style="color:#10b981">バーチャルヒューマン技術</strong>：GAN生成のモデル画像をECサイトの試着に応用。低コスト自動生成が強み。<br><br><strong style="color:#10b981">図面解析AI</strong>：建設・建築の手書き・CAD図面をAIが解析。矢作建設工業の検図業務工数削減を実現。<br><br>画像生成高速化論文がWACV2025（コンピュータービジョン国際会議）に採択（2026年2月）。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">GAN（敵対的生成ネットワーク）</span>
+        <span class="chip">拡散モデル</span>
+        <span class="chip">合成データ生成</span>
+        <span class="chip">バーチャルヒューマン</span>
+        <span class="chip">異常検知AI</span>
+        <span class="chip">図面解析</span>
+      </div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者・CEOについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">岡田 侑貴（おかだ ゆうき）</div>
+    <div class="founder-role">代表取締役CEO / 創業者</div>
+    <p class="founder-bio">
+      1993年生まれ。京都大学情報学科に入学後、在学中から京都のAIベンチャーで金融データ解析に2年間従事。機械学習研究中にGAN（敵対的生成ネットワーク）の急速な発展に注目し、「GANで世の中を変えられる」と確信。2017年、京都大学発スタートアップとしてデータグリッドを設立。生成AIという言葉が普及する前からその技術に賭けてきたパイオニア。
+    </p>
+    <div class="founder-quote">
+      「GANが世界を変えると確信した瞬間に、迷わず会社を作った。生成AIの黎明期から一貫して研究開発に取り組んできたことが、今の強みになっている。」
+    </div>
+  </div>
+</div>
+
+<!-- Sansan -->
+<div class="card" data-cat="genai" style="--cat-color: var(--cat-genai)">
+  <div class="card-header">
+    <div class="card-icon">📇</div>
+    <div class="card-title-area">
+      <div class="card-name">Sansan</div>
+      <span class="cat-badge">生成AI</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">名刺管理から経理DXへ軸足を移した上場SaaSリーダー。Bill Oneへの生成AI搭載が急加速中。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#10b981">AI自動照合</strong>（2025年11月）：請求書データと仕入れデータを総額・明細単位で自動照合。「りんご」「林檎」「apple」など表記揺れもセマンティック類似性でAIが判断。<br><br><strong style="color:#10b981">AI自動起票</strong>（2026年夏予定）：請求書明細から勘定科目・金額・税率を自動サジェスト。<br><br><strong style="color:#10b981">自動承認</strong>（2026年夏予定）：照合作業の完全自動化でヒューマンレスな経理フローへ。<br><br>マイクロサービスアーキテクチャ上にAI Agentを段階的に組み込む「AIファースト設計」に移行中。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">セマンティック照合</span>
+        <span class="chip">OCR + 生成AI</span>
+        <span class="chip">マイクロサービス</span>
+        <span class="chip">AI Agent統合</span>
+        <span class="chip">スキーマ駆動開発</span>
+      </div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者・CEOについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">寺田 親弘（てらだ ちかひろ）</div>
+    <div class="founder-role">代表取締役社長 / 創業者</div>
+    <p class="founder-bio">
+      1976年東京都生まれ。慶應義塾大学環境情報学部（SFC）卒業後、三井物産に入社して情報産業部門へ。米国シリコンバレー駐在でベンチャー企業の日本展開を支援。帰国後は社内ベンチャーとしてデータベースソフトの輸入販売を立ち上げ。2007年Sansanを設立。2019年東証マザーズ上場、2021年東証一部へ昇格。
+    </p>
+    <div class="founder-quote">
+      「10センチでもいいから、昨日より前に進む。Sansanという会社があったから世の中がこう変わった——そう言われる会社にしたい。」
+    </div>
+  </div>
+</div>
+
+<!-- SIGNATE -->
+<div class="card" data-cat="genai" style="--cat-color: var(--cat-genai)">
+  <div class="card-header">
+    <div class="card-icon">🏆</div>
+    <div class="card-title-area">
+      <div class="card-name">SIGNATE</div>
+      <span class="cat-badge">生成AI</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">AI活用の戦略策定から人材育成まで一気通貫で支援。コンペティションプラットフォームと企業向けリスキリングが2本柱。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#10b981">コンペティションプラットフォーム</strong>：企業の実課題をデータサイエンスコンペ化。企業内AI人材を発掘・育成しながら、実ビジネス課題を解く。<br><br><strong style="color:#10b981">SIGNATE Cup 2026 春</strong>（5〜6月開催）：業界横断の企業対抗AIコンペ。トヨタ・ブリヂストン・三菱電機など累計31社758名が参加。<br><br>定期的に「AI活用実態調査レポート」を発刊。企業のAI導入状況をデータで可視化。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">競技型AI学習プラットフォーム</span>
+        <span class="chip">データサイエンス教育</span>
+        <span class="chip">AI人材評価</span>
+        <span class="chip">企業向けリスキリング</span>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><strong>31社</strong><span>コンペ参加企業（累計）</span></div>
+      <div class="kpi"><strong>758名</strong><span>参加人数（累計）</span></div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者・CEOについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">齊藤 秀（さいとう しゅう）</div>
+    <div class="founder-role">代表取締役CEO</div>
+    <p class="founder-bio">
+      Kaggle（世界最大のデータサイエンスコンペプラットフォーム）が日本に普及する前から、日本版のコンペプラットフォームの必要性を感じて創業。データサイエンスコミュニティの育成と企業のDX推進を組み合わせた独自モデルを構築。企業ニーズとAI人材のマッチングをコンペという仕組みで実現。
+    </p>
+    <div class="founder-quote">
+      「コンペは人材発掘だけでなく、企業の組織文化を変えるきっかけになる。競い合うことで、組織全体のAIリテラシーが底上げされる。」
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     AI研修・リスキリング
+══════════════════════════════════════════════ -->
+
+<!-- SHIFT AI -->
+<div class="card" data-cat="reskill" style="--cat-color: var(--cat-reskill)">
+  <div class="card-header">
+    <div class="card-icon">📚</div>
+    <div class="card-title-area">
+      <div class="card-name">SHIFT AI</div>
+      <span class="cat-badge">AI研修・リスキリング</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">「日本をAI先進国に」をミッション。会員2.5万人超の生成AI学習コミュニティNo.1を標榜。個人・法人・教育機関向けの3ライン展開。</p>
+    </div>
+    <div>
+      <div class="section-label">サービス詳細</div>
+      <p class="desc"><strong style="color:#f59e0b">SHIFT AI</strong>：個人向け生成AI学習コミュニティ。最新AI動向・ツール活用・プロンプト実践を継続的に学べる。<br><br><strong style="color:#f59e0b">SHIFT AI for Biz</strong>：法人向けリスキリング。CursorコースやマーケティングコースなどAIツール特化のプログラム。<br><br><strong style="color:#f59e0b">独自の2026年予測</strong>：AIのパラダイムが「事前学習」から「強化学習（事後学習）」へシフト。必要スキルも「プロンプトを打つだけ」から「複数AIをオーケストレートする指揮者能力」へ変化すると提言。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術・手法</div>
+      <div class="tech-chips">
+        <span class="chip">生成AI活用教育</span>
+        <span class="chip">Cursor</span>
+        <span class="chip">AIオーケストレーション</span>
+        <span class="chip">コミュニティ型学習</span>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><strong>2.5万人+</strong><span>コミュニティ会員数</span></div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者・CEOについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">木内 翔大（きうち しょうだい）</div>
+    <div class="founder-role">代表取締役CEO / 創業者</div>
+    <p class="founder-bio">
+      幼少期からプログラミングに親しみ、学生時代にフリーランスエンジニアとして活動。2015年、日本初のマンツーマンプログラミングスクール「侍エンジニア塾」を創業。2022年に株式会社10Xを設立し、2023年6月に社名をSHIFT AIへ変更。イーロン・マスクの「人類に貢献するサービスをつくる」という思想に強い影響を受け、「AIビジネスで世界平和に貢献する」という壮大なビジョンを掲げる。
+    </p>
+    <div class="founder-quote">
+      「シンギュラリティのその先へ。テクノロジーで戦争をなくし、人類の危機を救いたい——それがAI教育に注力する理由だ。」
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     音声系
+══════════════════════════════════════════════ -->
+
+<!-- ElevenLabs Japan -->
+<div class="card" data-cat="voice" style="--cat-color: var(--cat-voice)">
+  <div class="card-header">
+    <div class="card-icon">🎙️</div>
+    <div class="card-title-area">
+      <div class="card-name">ElevenLabs Japan</div>
+      <span class="cat-badge">音声系</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">音声AI分野のグローバルリーダー。2022年設立、2025年4月に初の海外法人として東京に日本法人設立。評価額は2025年33億ドル→2026年110億ドルに急騰。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#ec4899">Multilingual V2</strong>：70ヶ国語以上対応。感情表現・抑揚の自然さで最高品質の音声合成モデル。<br><br><strong style="color:#ec4899">Flash v2.5</strong>：低コスト・低遅延、32ヶ国語対応。リアルタイムアプリ・コールセンター用途向け。<br><br><strong style="color:#ec4899">Scribe v1</strong>：99ヶ国語対応の音声認識（STT）モデル。文字起こし・吹き替え制作。<br><br><strong style="color:#ec4899">Image & Video</strong>（2025年11月）：画像生成→動画化→音声付与をワンストップで実現。音声プラットフォームからマルチモーダルコンテンツスタジオへ進化。<br><br>TBS番組でAI吹き替え採用、NTTドコモと連携済み。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">TTS（テキスト音声合成）</span>
+        <span class="chip">STT（音声認識）</span>
+        <span class="chip">感情制御</span>
+        <span class="chip">多言語対応（99ヶ国語）</span>
+        <span class="chip">リアルタイム低遅延</span>
+        <span class="chip">マルチモーダル</span>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><strong>110億ドル</strong><span>評価額（2026年）</span></div>
+      <div class="kpi"><strong>99ヶ国語</strong><span>音声認識対応言語数</span></div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者について
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">Mati Staniszewski（CEO）＆ Piotr Dąbkowski（CTO）</div>
+    <div class="founder-role">ポーランド出身の幼馴染コンビ / 共同創業者</div>
+    <p class="founder-bio">
+      ワルシャワのコペルニクス高校（IB校）で出会い、英国へ。MatはImperial College Londonで数学を学んだ後、<strong>Palantir</strong>でデプロイメント戦略家として勤務。PiotrはOxford卒業後、<strong>Google</strong>で機械学習エンジニアとして経験を積む。起業のきっかけは「アメリカ映画のひどい吹き替えに不満を感じたこと」。2022年創業3年で売上200億円超、評価額110億ドルという驚異的な成長を実現。TIME誌「AI分野で最も影響力のある100人」にMatiが2025年選出。
+    </p>
+    <div class="founder-quote">
+      「音声は次世代のコア・インターフェースになる。テキストより自然で感情豊かなコミュニケーションを、すべての人とすべての言語に届けたい。」 —Mati Staniszewski（Sequoia Capital ポッドキャストより）
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     その他AIサービス
+══════════════════════════════════════════════ -->
+
+<!-- Snowflake -->
+<div class="card" data-cat="other" style="--cat-color: var(--cat-other)">
+  <div class="card-header">
+    <div class="card-icon">❄️</div>
+    <div class="card-title-area">
+      <div class="card-name">Snowflake合同会社</div>
+      <span class="cat-badge">その他AIサービス</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">クラウドデータプラットフォームのグローバルリーダー（NYSE上場）。日本ではISMAP登録済みで政府調達も対応。OpenAI・Anthropicと$400M提携。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#94a3b8">Snowflake Cortex</strong>：Snowflake上でLLMをSQLから直接呼び出せる生成AIプラットフォーム。ベクトル検索・感情分析・要約・翻訳などをSQLだけで実現。データとAIを同じプラットフォーム内に統合することで、データの外部移動リスクをゼロにする。<br><br><strong style="color:#94a3b8">Snowflake Intelligence</strong>（2025年12月から日本展開）：企業データを横断して分析するAIエージェント。自然言語でデータを質問するだけで洞察を返す。Cortex Analyst・Arctic Embed等の独自モデルも展開。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">クラウドデータウェアハウス</span>
+        <span class="chip">Cortex（LLM on Snowflake）</span>
+        <span class="chip">ベクトル検索</span>
+        <span class="chip">Snowflake Intelligence</span>
+        <span class="chip">Arctic Embed</span>
+        <span class="chip">ISMAP準拠</span>
+      </div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者について
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">Benoit Dageville・Thierry Cruanes・Marcin Zukowski</div>
+    <div class="founder-role">共同創業者（2012年設立）</div>
+    <p class="founder-bio">
+      BenoitとThierryはOracle出身のデータベースエンジニア。MarcinはMonetDB（列指向DBの先駆け）の開発者。「データをクラウドで誰もが使えるようにする」という発想で2012年に創業。現CEOは<strong>Sridhar Ramaswamy</strong>（元Google広告部門SVP、AI特化の検索エンジンNeeva創業者）。2020年にNYSE上場したIPOはソフトウェア史上最大規模だった。
+    </p>
+    <div class="founder-quote">
+      「データがどこにあってもAIは機能すべきだ。Snowflakeはデータとインテリジェンスが出会う場所になる。」
+    </div>
+  </div>
+</div>
+
+<!-- シナモン AI -->
+<div class="card" data-cat="other" style="--cat-color: var(--cat-other)">
+  <div class="card-header">
+    <div class="card-icon">📄</div>
+    <div class="card-title-area">
+      <div class="card-name">シナモン（Cinnamon AI）</div>
+      <span class="cat-badge">その他AIサービス</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">ドキュメントAI（AI-OCR + 生成AI）に特化。製造・物流・金融など紙文化の残る産業向けに、テンプレート不要の高精度情報抽出技術を提供。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#94a3b8">Flax Scanner</strong>：座標定義・テンプレート作成不要で任意フォーマットの書類から高精度抽出。港湾物流大手・上組の貿易書類で30項目以上・精度94%を達成。<br><br><strong style="color:#94a3b8">Super RAG</strong>：生成AI抽出型RAGプラットフォーム。2025年12月にMicrosoft SharePointと正式連携。社内文書をRAGで検索・回答生成。<br><br><strong style="color:#94a3b8">ぜんぶよむもん</strong>：製造業特化AI-OCR。紙の帳票・図面をデジタル化しナレッジ管理へ。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">独自AI-OCRエンジン</span>
+        <span class="chip">生成AI抽出型RAG</span>
+        <span class="chip">SharePoint連携</span>
+        <span class="chip">製造業特化OCR</span>
+        <span class="chip">合成データ生成</span>
+      </div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者・CEOについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">平野 未来（ひらの みく）</div>
+    <div class="founder-role">代表取締役 Co-CEO / 創業者</div>
+    <p class="founder-bio">
+      1984年生まれ。お茶の水女子大学理学部情報科学科卒業後、東京大学大学院工学系研究科でAI研究。在学中の2005・2006年にIPA「未踏ソフトウェア創造事業」に2年連続採択というスーパークリエータの経歴。2006年、大学院在学中にネイキッドテクノロジーを創業し、2011年にミクシィへ売却（EXIT）。2012年にシンガポールでシナモンを創業し、2016年に日本法人設立。世界経済フォーラム（Davos）の<strong>Young Global Leader</strong>に選出。3児の母として、「仕事 = 社会課題を解く行為」という信条を実践。岸田政権の「新しい資本主義実現会議」有識者にも就任。
+    </p>
+    <div class="founder-quote">
+      「キャリアを考えたことは一度もない。好きなことを突き詰めてきただけ。AIができる仕事はAIに任せ、人間は人間らしい仕事に集中できる世界をつくりたい。」
+    </div>
+  </div>
+</div>
+
+<!-- Helpfeel -->
+<div class="card" data-cat="other" style="--cat-color: var(--cat-other)">
+  <div class="card-header">
+    <div class="card-icon">💡</div>
+    <div class="card-title-area">
+      <div class="card-name">Helpfeel</div>
+      <span class="cat-badge">その他AIサービス</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">特許取得の「意図予測検索技術」によるAI-FAQシステム。600サイト以上に導入。2025年8月シリーズEで26億円調達。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#94a3b8">意図予測検索3</strong>：独自開発RAG × ナレッジグラフ。ユーザーの曖昧な入力から「本当に聞きたいこと」を先読みして回答。ハルシネーションをナレッジグラフで抑制。<br><br><strong style="color:#94a3b8">Agent Mode</strong>：会話型UIで自己解決を誘導するFAQエージェント。<br><br><strong style="color:#94a3b8">Helpfeel Support</strong>：AIがオペレーター業務を支援する問い合わせ管理ツール。<br><br><strong style="color:#94a3b8">Helpfeel Analytics</strong>：FAQ・問い合わせデータから顧客の声を構造化して分析。<br><br>ITreview Best Software in Japan 2025受賞（顧客満足スコア4.6）。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">意図予測検索（特許）</span>
+        <span class="chip">RAG</span>
+        <span class="chip">ナレッジグラフ</span>
+        <span class="chip">Scrapbox連携</span>
+        <span class="chip">顧客ボイス分析</span>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><strong>600サイト+</strong><span>導入実績</span></div>
+      <div class="kpi"><strong>26億円</strong><span>シリーズE（2025年8月）</span></div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 創業者・CEOについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">洛西 一周（らくさい いっしゅう）</div>
+    <div class="founder-role">代表取締役CEO / 創業者</div>
+    <p class="founder-bio">
+      1982年生まれ。慶應義塾大学大学院政策・メディア研究科卒業。高校生時にメモ・スクラッピングツール「紙コピ」を開発し累計30億円超の売上を記録という天才ぶり。2003年にIPA「未踏ソフトウェア創造事業」のスーパークリエータに認定。2007年、シリコンバレーに渡りNota Inc.（現Helpfeel）を創業。共同創業のCTO益子宗氏はAppleから招聘されiPhoneのフリック入力を設計したUIのパイオニア。Gyazo（スクリーンショット共有）、Scrapbox（ウィキ型ナレッジ管理）、Helpfeel（FAQ）という3世代のプロダクトで一貫して「情報を見つける体験」を追求している。
+    </p>
+    <div class="founder-quote">
+      「人を助けるAIを創出したい。FAQは表面だけ変えても意味がない——ユーザーが本当に聞きたいことを先読みする検索体験をつくることが私たちの使命。」
+    </div>
+  </div>
+</div>
+
+<!-- Gen-AX -->
+<div class="card" data-cat="other" style="--cat-color: var(--cat-other)">
+  <div class="card-header">
+    <div class="card-icon">📞</div>
+    <div class="card-title-area">
+      <div class="card-name">Gen-AX（ソフトバンク子会社）</div>
+      <span class="cat-badge">その他AIサービス</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">ソフトバンクが株主の生成AIスタートアップ。コンタクトセンター・バックオフィス向けAIエージェントを展開。日立と共同でAI成熟度モデルも開発。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#94a3b8">X-Boost</strong>（2025年1月提供開始）：コンタクトセンター・バックオフィス向け生成AI SaaS。照会応答業務を効率化。<br><br><strong style="color:#94a3b8">X-Ghost</strong>（2025年11月正式提供）：自律思考型AI音声応対ソリューション。AIがオペレーターとして自律的に電話応対。<br><br><strong style="color:#94a3b8">MA-ATRIX</strong>：日立と共同開発した「生成AI適応成熟度モデル」。日立の1,000事例以上とGen-AXのSaaS知見を融合。<br><br><strong>ロードマップ</strong>：2024年CS自動化 → 2025年オムニチャネル → 2026年企業エージェント → 2027年パーソナルエージェント。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">自律型音声AI</span>
+        <span class="chip">コンタクトセンターAI</span>
+        <span class="chip">生成AI SaaS</span>
+        <span class="chip">AI成熟度モデル</span>
+      </div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 設立背景について
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">ソフトバンク × 生成AIスタートアップ</div>
+    <div class="founder-role">設立背景</div>
+    <p class="founder-bio">
+      ソフトバンクグループが生成AI時代を見据えて投資・設立を支援した企業。ソフトバンクのエンタープライズ顧客基盤を生かしながら、生成AIのSaaSとコンサルティングを組み合わせた「業務刷新」特化モデルで展開。エンジニア1人当たり月10万円規模のAI・開発ツールを整備するなど、社内のAI活用文化も先進的。
+    </p>
+    <div class="founder-quote">
+      「AIは生産性ツールではなく、業務そのものを再設計するプラットフォームになる。CSの完全自動化から始め、2027年にはパーソナルエージェントの時代へ。」
+    </div>
+  </div>
+</div>
+
+<!-- JAPAN AI -->
+<div class="card" data-cat="other" style="--cat-color: var(--cat-other)">
+  <div class="card-header">
+    <div class="card-icon">🇯🇵</div>
+    <div class="card-title-area">
+      <div class="card-name">JAPAN AI</div>
+      <span class="cat-badge">その他AIサービス</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">企業のDX・AXを包括支援。CHAT・MARKETING・SPEECH・AGENT・CALLの5サービスラインナップ。2025年7月シリーズBで19億円調達。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#94a3b8">JAPAN AI CHAT</strong>：最新LLMを活用した法人向けAIプラットフォーム。<br><br><strong style="color:#94a3b8">JAPAN AI MARKETING</strong>：広告プランニングから画像生成・LP作成・ペルソナ設計・法務チェックまでをAIが一気通貫で担うマーケティングAI。<br><br><strong style="color:#94a3b8">JAPAN AI SPEECH</strong>：議事録自動生成。2026年4月にクロス分析機能を追加。<br><br><strong style="color:#94a3b8">JAPAN AI AGENT</strong>：経理・法務・PRなど機能別の自律AIエージェント（2025年12月展開）。<br><br><strong style="color:#94a3b8">JAPAN AI CALL</strong>：電話応対を自動化するAIオペレーター。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">LLMプラットフォーム</span>
+        <span class="chip">マーケティングAI</span>
+        <span class="chip">音声→テキスト（STT）</span>
+        <span class="chip">AIエージェント</span>
+        <span class="chip">AI電話対応</span>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi"><strong>19億円</strong><span>シリーズB（2025年7月）</span></div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 代表CEOについて
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">工藤 智昭（くどう ともあき）</div>
+    <div class="founder-role">代表取締役社長</div>
+    <p class="founder-bio">
+      日本企業のDX・AX推進をミッションに掲げる。「日本の商習慣を深く学習したAIを開発し、あらゆるビジネスシーンのパートナーになる」というアプローチで、汎用LLMではカバーしきれない日本企業固有のワークフローに対応するサービスを展開。JAFCO・日本生命キャピタルなどから19億円を調達して組織拡大中。
+    </p>
+    <div class="founder-quote">
+      「生成AIで日本企業の生産性という社会課題に立ち向かう。日本のビジネス文化を理解したAIでなければ、本当のDXはできない。」
+    </div>
+  </div>
+</div>
+
+<!-- Polaris.AI -->
+<div class="card" data-cat="other" style="--cat-color: var(--cat-other)">
+  <div class="card-header">
+    <div class="card-icon">🌟</div>
+    <div class="card-title-area">
+      <div class="card-name">Polaris.AI</div>
+      <span class="cat-badge">その他AIサービス</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="section-label">概要</div>
+      <p class="desc">LLM特化のAI受託開発・コンサルティング・人材育成。ジヤトコ・日本郵船向けのRAGアプリ開発実績。2026年3月に文科省の教育AI実証事業に採択。</p>
+    </div>
+    <div>
+      <div class="section-label">技術詳細</div>
+      <p class="desc"><strong style="color:#94a3b8">LLMベースの動的ワークフロー制御</strong>：単純なQ&A応答に留まらず、LLMが状況を判断しながら自律的に複雑なタスクを実行する技術が特徴。<br><br><strong style="color:#94a3b8">RAGアプリ開発</strong>：ジヤトコ（自動車トランスミッション大手）・日本郵船（海運大手）向けに社内ナレッジを活用したRAGシステムを構築。<br><br><strong style="color:#94a3b8">教育AI</strong>：文科省「教育分野特化生成AI実証研究」に2026年3月採択。特別支援教育にも展開予定。</p>
+    </div>
+    <div>
+      <div class="section-label">コア技術</div>
+      <div class="tech-chips">
+        <span class="chip">LLM受託開発</span>
+        <span class="chip">動的ワークフロー制御</span>
+        <span class="chip">RAG構築</span>
+        <span class="chip">教育特化生成AI</span>
+        <span class="chip">AIコンサルティング</span>
+      </div>
+    </div>
+  </div>
+  <button class="founder-toggle" onclick="toggleFounder(this)">
+    <span class="arrow">›</span> 経営思想について
+  </button>
+  <div class="founder-panel">
+    <div class="founder-name">Polaris.AI 創業チーム</div>
+    <div class="founder-role">LLM特化スタートアップ</div>
+    <p class="founder-bio">
+      「汎用AIではなく、産業・業種に深く刺さるAI実装」を追求するスタートアップ。大企業（ジヤトコ・日本郵船など）との実プロジェクトで実績を積み上げ、2026年3月には文科省の教育分野特化生成AI実証研究事業にも採択されて教育領域へ展開。LLMを「道具として使う」のではなく「ワークフローに組み込む」という思想で高い付加価値を出す。
+    </p>
+    <div class="founder-quote">
+      「LLMはツールではなく、業務ロジックの一部として組み込まれるべき。そこに私たちの独自価値がある。」
+    </div>
+  </div>
+</div>
+
+</div><!-- /grid -->
+
+<script>
+  // ── Filter ──
+  const btns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.card');
+  const trendBox = document.getElementById('trend-box');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      cards.forEach(card => {
+        if (cat === 'all' || card.dataset.cat === cat) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      trendBox.style.display = cat === 'all' ? 'block' : 'none';
+    });
+  });
+
+  // ── Founder Toggle ──
+  function toggleFounder(btn) {
+    btn.classList.toggle('open');
+    const panel = btn.nextElementSibling;
+    panel.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>

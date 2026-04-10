@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>リクルートHD — 事業構造・戦略分析</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #1a1a1a;
+    --mid: #444;
+    --grey: #888;
+    --light-grey: #bbb;
+    --border: #ddd;
+    --off-white: #f5f5f5;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+  }
+
+  .slide {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 10%;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .slide-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--light-grey);
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+
+  /* COVER */
+  .cover {
+    background: var(--black);
+    color: var(--white);
+    padding: 80px 10%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cover .eyebrow {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--grey);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  .cover h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+
+  .cover h1 span { color: var(--grey); }
+
+  .cover .subtitle {
+    font-size: 18px;
+    color: var(--grey);
+    font-weight: 300;
+    max-width: 600px;
+    margin-bottom: 64px;
+    line-height: 1.7;
+  }
+
+  .cover .thesis-box {
+    border-left: 3px solid var(--white);
+    padding: 20px 28px;
+    background: rgba(255,255,255,0.05);
+    max-width: 700px;
+  }
+
+  .cover .thesis-box p {
+    font-size: 16px;
+    color: #ccc;
+    line-height: 1.8;
+  }
+
+  /* SECTION HEADING */
+  h2.section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: var(--black);
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--grey);
+    max-width: 640px;
+    margin-bottom: 56px;
+    line-height: 1.8;
+  }
+
+  /* PROBLEM / CARD GRID */
+  .card-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 960px;
+  }
+
+  .card-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .card-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .problem-card {
+    border: 1px solid var(--border);
+    padding: 32px;
+  }
+
+  .problem-card .label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--light-grey);
+    margin-bottom: 12px;
+  }
+
+  .problem-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--dark);
+    line-height: 1.4;
+  }
+
+  .problem-card p {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.7;
+  }
+
+  /* STAT ROW */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    margin-bottom: 56px;
+  }
+
+  .stat-item {
+    padding: 32px 28px;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-item .s-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light-grey);
+    margin-bottom: 8px;
+  }
+
+  .stat-item .s-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(24px, 3vw, 40px);
+    font-weight: 800;
+    color: var(--black);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-item .s-desc {
+    font-size: 12px;
+    color: var(--grey);
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    max-width: 900px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 80px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .tl-item {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 36px;
+    position: relative;
+  }
+
+  .tl-year {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--mid);
+    min-width: 64px;
+    text-align: right;
+    padding-top: 2px;
+  }
+
+  .tl-dot {
+    position: absolute;
+    left: 76px;
+    top: 8px;
+    width: 9px;
+    height: 9px;
+    background: var(--black);
+    border-radius: 50%;
+  }
+
+  .tl-content {
+    padding-left: 24px;
+  }
+
+  .tl-content h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--dark);
+  }
+
+  .tl-content p {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  /* SBU CARDS */
+  .sbu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 16px;
+  }
+
+  .sbu-card {
+    background: var(--white);
+    padding: 36px 28px;
+  }
+
+  .sbu-card.highlight {
+    background: var(--black);
+  }
+
+  .sbu-card .sbu-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light-grey);
+    margin-bottom: 12px;
+  }
+
+  .sbu-card.highlight .sbu-label { color: #555; }
+
+  .sbu-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--dark);
+    line-height: 1.3;
+  }
+
+  .sbu-card.highlight h3 { color: var(--white); }
+
+  .sbu-card .products {
+    font-size: 12px;
+    color: var(--grey);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .sbu-card.highlight .products { color: #777; }
+
+  .sbu-card .ebitda-bar {
+    margin-top: auto;
+  }
+
+  .sbu-card .ebitda-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--light-grey);
+    margin-bottom: 6px;
+  }
+
+  .sbu-card.highlight .ebitda-label { color: #444; }
+
+  .ebitda-track {
+    height: 4px;
+    background: var(--off-white);
+    margin-bottom: 6px;
+  }
+
+  .sbu-card.highlight .ebitda-track { background: #222; }
+
+  .ebitda-fill {
+    height: 100%;
+    background: var(--black);
+  }
+
+  .sbu-card.highlight .ebitda-fill { background: var(--white); }
+
+  .ebitda-pct {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--dark);
+  }
+
+  .sbu-card.highlight .ebitda-pct { color: var(--white); }
+
+  /* FOUR CORNERS (OTHERLO) */
+  .corner-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 900px;
+  }
+
+  .corner-cell {
+    background: var(--white);
+    padding: 36px 32px;
+    position: relative;
+  }
+
+  .corner-cell.active {
+    background: var(--black);
+  }
+
+  .corner-cell .c-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light-grey);
+    margin-bottom: 10px;
+  }
+
+  .corner-cell.active .c-label { color: #555; }
+
+  .corner-cell h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--dark);
+    line-height: 1.3;
+  }
+
+  .corner-cell.active h3 { color: var(--white); }
+
+  .corner-cell p {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.7;
+  }
+
+  .corner-cell.active p { color: #888; }
+
+  .corner-cell .c-risk {
+    margin-top: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--light-grey);
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  .corner-cell.active .c-risk {
+    border-top-color: #2a2a2a;
+    color: #555;
+  }
+
+  .corner-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--white);
+    color: var(--black);
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    text-transform: uppercase;
+  }
+
+  /* FLYWHEEL */
+  .flywheel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 16px;
+  }
+
+  .flywheel-card {
+    border-top: 3px solid var(--black);
+    padding-top: 24px;
+  }
+
+  .flywheel-card .fw-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--off-white);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .flywheel-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--dark);
+  }
+
+  .flywheel-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .fw-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .fw-arrow {
+    font-size: 11px;
+    color: var(--light-grey);
+    padding-top: 2px;
+    min-width: 12px;
+  }
+
+  .fw-step span {
+    font-size: 12px;
+    color: var(--grey);
+    line-height: 1.5;
+  }
+
+  /* GROWTH TABLE */
+  .growth-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 13px;
+  }
+
+  .growth-table th {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--black);
+  }
+
+  .growth-table td {
+    padding: 16px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--dark);
+    vertical-align: top;
+  }
+
+  .growth-table tr:last-child td { border-bottom: none; }
+
+  .growth-table td:first-child {
+    font-weight: 700;
+    min-width: 160px;
+  }
+
+  .phase-tag {
+    display: inline-block;
+    background: var(--off-white);
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    color: var(--mid);
+  }
+
+  /* PHASE TIMELINE for Indeed */
+  .phase-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 16px;
+    max-width: 900px;
+  }
+
+  .phase-cell {
+    background: var(--white);
+    padding: 28px 24px;
+  }
+
+  .phase-cell.current { background: var(--black); }
+
+  .phase-cell .p-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light-grey);
+    margin-bottom: 8px;
+  }
+
+  .phase-cell.current .p-label { color: #555; }
+
+  .phase-cell h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--dark);
+  }
+
+  .phase-cell.current h4 { color: var(--white); }
+
+  .phase-cell p {
+    font-size: 12px;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  .phase-cell.current p { color: #888; }
+
+  /* RISK GRID */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 960px;
+    margin-top: 16px;
+  }
+
+  .risk-item {
+    border-left: 3px solid var(--border);
+    padding-left: 20px;
+  }
+
+  .risk-item.high { border-left-color: var(--black); }
+
+  .risk-item .r-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light-grey);
+    margin-bottom: 8px;
+  }
+
+  .risk-item.high .r-label { color: var(--mid); }
+
+  .risk-item h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--dark);
+  }
+
+  .risk-item p {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.7;
+  }
+
+  /* SOCIAL IMPACT */
+  .impact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .impact-left h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    color: var(--black);
+  }
+
+  .impact-left p {
+    font-size: 15px;
+    color: var(--grey);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .chain-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 20px;
+  }
+
+  .chain-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .chain-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 24px;
+  }
+
+  .chain-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--black);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .chain-line {
+    width: 1px;
+    height: 32px;
+    background: var(--border);
+  }
+
+  .chain-text {
+    font-size: 13px;
+    color: var(--dark);
+    line-height: 1.5;
+    padding-bottom: 24px;
+  }
+
+  .chain-item:last-child .chain-text { padding-bottom: 0; }
+
+  /* GOAL BOXES */
+  .goal-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .goal-cell {
+    background: var(--white);
+    padding: 32px 28px;
+  }
+
+  .goal-cell .g-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light-grey);
+    margin-bottom: 12px;
+  }
+
+  .goal-cell .g-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    color: var(--black);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .goal-cell p {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.7;
+  }
+
+  /* CLOSING */
+  .closing {
+    background: var(--black);
+    color: var(--white);
+    padding: 80px 10%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .closing .q-mark {
+    font-family: 'Poppins', sans-serif;
+    font-size: 120px;
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1;
+    margin-bottom: -20px;
+  }
+
+  .closing h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(24px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+    max-width: 700px;
+    margin-bottom: 32px;
+  }
+
+  .closing .closer-body {
+    font-size: 15px;
+    color: #777;
+    line-height: 1.8;
+    max-width: 600px;
+    margin-bottom: 48px;
+  }
+
+  .closing .divider {
+    width: 48px;
+    height: 1px;
+    background: var(--grey);
+    margin-bottom: 32px;
+  }
+
+  .closing .footer-note {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #444;
+    text-transform: uppercase;
+  }
+
+  /* MOAT TABLE */
+  .moat-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 13px;
+    max-width: 800px;
+  }
+
+  .moat-table th {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--black);
+  }
+
+  .moat-table td {
+    padding: 16px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--dark);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .moat-table tr:last-child td { border-bottom: none; }
+
+  .moat-table td:first-child { font-weight: 700; min-width: 160px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .slide { padding: 60px 6%; }
+    .card-grid-2, .card-grid-3, .card-grid-4,
+    .sbu-grid, .corner-grid, .flywheel-grid,
+    .risk-grid, .impact-layout, .goal-row,
+    .phase-row, .stat-row {
+      grid-template-columns: 1fr;
+    }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: COVER -->
+<div class="cover">
+  <div class="eyebrow">Recruit Holdings — Business Structure Analysis / 2026.04</div>
+  <h1>リクルートは<br><span>何を押さえているのか。</span></h1>
+  <p class="subtitle">
+    1962年、就職情報の非対称性に気づいた一人の学生が起業した。<br>
+    60年後、その会社はグローバルで3.5兆円を稼ぐ<br>マッチングプラットフォームになった。
+  </p>
+  <div class="thesis-box">
+    <p>
+      リクルートの本質は媒体企業でも人材企業でもない。
+      <strong style="color:#fff">「情報の非対称性を壊す」</strong>ことを一貫して続けてきた企業だ。
+      紙がデジタルになり、デジタルがAIになっても、コアは変わっていない。
+    </p>
+  </div>
+</div>
+
+<!-- SLIDE 2: FINANCIALS -->
+<div class="slide">
+  <div class="slide-num">01 — Scale</div>
+  <h2 class="section-title">FY2024 財務規模</h2>
+  <p class="section-sub">過去最高のEBITDAを更新。HR Technologyが圧倒的な利益エンジンになっている。</p>
+
+  <div class="stat-row">
+    <div class="stat-item">
+      <div class="s-label">Revenue</div>
+      <div class="s-num">3.6兆</div>
+      <div class="s-desc">売上収益（前期比 +4.1%）</div>
+    </div>
+    <div class="stat-item">
+      <div class="s-label">Adj. EBITDA</div>
+      <div class="s-num">6,788億</div>
+      <div class="s-desc">過去最高（前期比 +13.5%）</div>
+    </div>
+    <div class="stat-item">
+      <div class="s-label">Overseas Revenue</div>
+      <div class="s-num">55%+</div>
+      <div class="s-desc">海外売上比率（2012年は3.6%）</div>
+    </div>
+    <div class="stat-item">
+      <div class="s-label">Countries</div>
+      <div class="s-num">60+</div>
+      <div class="s-desc">Indeed展開国・地域</div>
+    </div>
+  </div>
+
+  <div class="sbu-grid">
+    <div class="sbu-card highlight">
+      <div class="sbu-label">HR Technology SBU</div>
+      <h3>Indeed /<br>Glassdoor</h3>
+      <p class="products">求人検索・企業口コミ・AI採用ツール。世界60カ国以上、28言語。580億件超の求職者プロフィール。</p>
+      <div class="ebitda-bar">
+        <div class="ebitda-label">EBITDA貢献</div>
+        <div class="ebitda-track"><div class="ebitda-fill" style="width:64.5%"></div></div>
+        <div class="ebitda-pct">64.5%</div>
+      </div>
+    </div>
+    <div class="sbu-card">
+      <div class="sbu-label">Matching & Solutions SBU</div>
+      <h3>SUUMO / ホットペッパー /<br>スタサプ / Airシリーズ</h3>
+      <p class="products">国内垂直型メディア＋SaaS。住宅・美容・飲食・旅行・結婚・教育。中小企業向けAirビジネスツールズ360万アカウント。</p>
+      <div class="ebitda-bar">
+        <div class="ebitda-label">EBITDA貢献</div>
+        <div class="ebitda-track"><div class="ebitda-fill" style="width:22%"></div></div>
+        <div class="ebitda-pct">約22%</div>
+      </div>
+    </div>
+    <div class="sbu-card">
+      <div class="sbu-label">Staffing SBU</div>
+      <h3>人材派遣<br>（欧米・豪）</h3>
+      <p class="products">欧米・アジア太平洋の人材派遣。売上規模は三事業中最大だが利益率は相対的に低い。景気感応型。</p>
+      <div class="ebitda-bar">
+        <div class="ebitda-label">EBITDA貢献</div>
+        <div class="ebitda-track"><div class="ebitda-fill" style="width:13.5%"></div></div>
+        <div class="ebitda-pct">約13%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: HISTORY -->
+<div class="slide">
+  <div class="slide-num">02 — History</div>
+  <h2 class="section-title">3つの拡張軸で<br>ここまで来た</h2>
+  <p class="section-sub">媒体は変わり続けたが、「個人と企業をつなぐ」本業は一度もブレていない。</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">1960s</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <h4>Phase 1：情報媒体の時代</h4>
+        <p>東大のプレハブから「大学新聞広告社」として創業。求人情報を学生に無料配布するモデルを発明。1962年に新卒向け冊子『企業への招待』発行——これがリクナビの原型。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">1980s</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <h4>「ライフイベント全般」へ拡張</h4>
+        <p>採用から日常消費へ。とらばーゆ（1980）、カーセンサー（1985）、じゃらん（1987）、ゼクシィ（1993）。「人生の転機」すべてに情報を届けるモデルへ。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2000s</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <h4>Phase 2：デジタル化と「予約・取引」統合</h4>
+        <p>リクナビ（1996年）でオンライン求人へ。ホットペッパー（2000年）で地域消費に参入。媒体＋予約機能で「閲覧→予約→来店」をワンストップ化。Vertical SaaS×メディアの原型が生まれる。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2012</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <h4>Indeed買収（約1,000億円）</h4>
+        <p>当時売上60〜70億円のスタートアップを買収。この一手がグローバルHRテック企業への転換点。FY2024時点で200倍超の成長。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2013</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <h4>Airレジ無料提供——「Land & Expand」戦略始動</h4>
+        <p>中小企業・店舗に無料POSレジを提供することでビジネスインフラへの侵入を開始。「集客→業務→決済」のフルスタックSaaSへの伏線。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2018</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <h4>Glassdoor買収（約1,300億円）</h4>
+        <p>「求人検索（Indeed）」＋「企業情報・口コミ（Glassdoor）」で、求職者の意思決定プロセス全体をカバー。2025〜2026年にIndeedへ正式統合。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2024〜</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <h4>Phase 3：AI転換期</h4>
+        <p>Smart Sourcing（AI採用ツール）、Indeed Connect（ATS直接統合）でVolume依存から「採用ワークフローの深い統合」へ転換。求人数が減っても単価（ARPJ）で稼ぐモデルへ。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: FOUR CORNERS -->
+<div class="slide">
+  <div class="slide-num">03 — Strategy</div>
+  <h2 class="section-title">オセロの4角——<br>どこを押さえているか</h2>
+  <p class="section-sub">4角を押さえると、盤面はひっくり返せる。リクルートが取りにいっている4つの「角」。</p>
+
+  <div class="corner-grid">
+    <div class="corner-cell active">
+      <div class="corner-badge">角 01</div>
+      <div class="c-label">求職者の旅の起点</div>
+      <h3>Indeed<br>— 最初に検索される場所</h3>
+      <p>世界580億件超の求職者プロフィール。「仕事を探す」行動の最初のタッチポイントを押さえることで、全採用フローへの入り口を独占する。60カ国以上、28言語。1分間に27人がIndeed/Glassdoor経由で雇用されている。</p>
+      <div class="c-risk">リスク：Googleが検索結果に求人を直接表示し、有機流入を侵食しつつある</div>
+    </div>
+    <div class="corner-cell">
+      <div class="corner-badge">角 02</div>
+      <div class="c-label">企業情報の信頼拠点</div>
+      <h3>Glassdoor<br>— 「この会社で働きたいか」の判断場所</h3>
+      <p>企業口コミ・年収データ・面接情報の独占データベース。求職者が「どこを受けるか」を決める意思決定フェーズを握る。IndeedとGlassdoorを両方持つことで、求職者の旅の全体をカバー。2025〜2026年にIndeedへ統合。</p>
+      <div class="c-risk">リスク：統合でGlassdoorブランドの独立性・信頼性が薄まる懸念</div>
+    </div>
+    <div class="corner-cell">
+      <div class="corner-badge">角 03</div>
+      <div class="c-label">採用ワークフローへの組み込み</div>
+      <h3>Indeed Connect<br>— 企業の採用システムに入り込む</h3>
+      <p>2026年1月開始。WorkdayなどのATSに候補者を直接ストリーム。350以上のATS連携により、採用担当者の日常業務フローの中にIndeedが不可欠な存在として入り込む。スイッチングコストが極めて高くなる。</p>
+      <div class="c-risk">リスク：ATSベンダーが自社内に求人機能を取り込む可能性</div>
+    </div>
+    <div class="corner-cell active">
+      <div class="corner-badge">角 04</div>
+      <div class="c-label">中小企業の業務インフラ</div>
+      <h3>Airシリーズ<br>— ビジネス運営の基盤を握る</h3>
+      <p>Airレジ（無料）で店舗に入り込み、Airペイ（決済）、Airシフト（シフト管理）、Airリザーブ（予約）へ展開。国内360万アカウント。ホットペッパーの集客メディアとの連携で「集客→業務→決済」をワンストップ化。</p>
+      <div class="c-risk">リスク：Square、Smaregi等の競合。ただしメディア集客との統合はユニーク</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: FLYWHEEL -->
+<div class="slide">
+  <div class="slide-num">04 — Structure</div>
+  <h2 class="section-title">3つの自己強化ループ</h2>
+  <p class="section-sub">各事業は独立して稼ぐだけでなく、互いを強化するフライホイール構造を持っている。</p>
+
+  <div class="flywheel-grid">
+    <div class="flywheel-card">
+      <div class="fw-num">01</div>
+      <h4>HRテクノロジーの<br>クロスサイドNE</h4>
+      <div class="flywheel-steps">
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>求職者が増える</span></div>
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>求人企業の価値が高まる（より多くの候補者にリーチ）</span></div>
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>求人企業が増え、課金単価が上がる</span></div>
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>データが増え、AIマッチング精度が向上</span></div>
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>求職者にとっての価値が高まる</span></div>
+        <div class="fw-step"><div class="fw-arrow">↻</div><span><strong>求職者がさらに増える</strong></span></div>
+      </div>
+    </div>
+    <div class="flywheel-card">
+      <div class="fw-num">02</div>
+      <h4>国内「媒体×SaaS×決済」<br>ループ</h4>
+      <div class="flywheel-steps">
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>Airレジ（無料）で中小企業が集まる</span></div>
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>Airペイ（決済）でトランザクションデータ蓄積</span></div>
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>ホットペッパーへの集客誘導</span></div>
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>集客成果データがSaaS改善に使われる</span></div>
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>店舗の生産性向上→リクルートへの依存度増加</span></div>
+        <div class="fw-step"><div class="fw-arrow">↻</div><span><strong>新たな中小企業が参加</strong></span></div>
+      </div>
+    </div>
+    <div class="flywheel-card">
+      <div class="fw-num">03</div>
+      <h4>グループ横断<br>データ基盤</h4>
+      <div class="flywheel-steps">
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>就職（リクナビ）のライフイベントデータ</span></div>
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>住宅（SUUMO）・美容（HPビューティー）・飲食・旅行データ</span></div>
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>個人のライフステージ横断データが蓄積</span></div>
+        <div class="fw-step"><div class="fw-arrow">↓</div><span>次のマッチング精度と広告ターゲティングが向上</span></div>
+        <div class="fw-step"><div class="fw-arrow">↻</div><span><strong>各事業の価値が相互に高まる</strong></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: GROWTH PHASES (Indeed) -->
+<div class="slide">
+  <div class="slide-num">05 — Growth</div>
+  <h2 class="section-title">Indeedの成長曲線：<br>3つのフェーズ</h2>
+  <p class="section-sub">買収時60〜70億円の売上が、10年で200倍超に。今は「量から単価」へのシフト期にある。</p>
+
+  <div class="phase-row">
+    <div class="phase-cell">
+      <div class="p-label">Phase 1 — 2012〜2020</div>
+      <h4>拡大期</h4>
+      <p>求職者数・ユーザーベースの拡大が指標。コロナ禍の採用需要急増でクリック単価が上昇。Volume成長期。</p>
+    </div>
+    <div class="phase-cell">
+      <div class="p-label">Phase 2 — 2022〜2023</div>
+      <h4>調整期</h4>
+      <p>米国採用市場冷却（金利上昇・景気不安）で求人数が減少。Glassdoor統合含む1,300人削減を発表。AIへの戦略シフト加速。</p>
+    </div>
+    <div class="phase-cell current">
+      <div class="p-label">Phase 3 — 2024〜現在</div>
+      <h4>収益最大化・AI転換期</h4>
+      <p>求人数（-8%）が減少しても、ARPJ（+15%）を引き上げることで収益維持。Smart Sourcing・Indeed Connectが次の成長エンジン。</p>
+    </div>
+  </div>
+
+  <div style="margin-top: 48px;">
+    <h2 class="section-title" style="font-size: 24px; margin-bottom: 16px;">各事業の成長フェーズ一覧</h2>
+    <table class="growth-table">
+      <thead>
+        <tr>
+          <th>事業</th>
+          <th>現フェーズ</th>
+          <th>成長ドライバー</th>
+          <th>主なリスク</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Indeed</td>
+          <td><span class="phase-tag">収益最大化・AI転換</span></td>
+          <td>ARPJ向上、Smart Sourcing、Indeed Connect</td>
+          <td>Google参入、採用市場軟化</td>
+        </tr>
+        <tr>
+          <td>Glassdoor</td>
+          <td><span class="phase-tag">統合・再構築</span></td>
+          <td>Indeed統合によるデータ融合効果</td>
+          <td>ブランド毀損、ユーザー離脱</td>
+        </tr>
+        <tr>
+          <td>スタディサプリ</td>
+          <td><span class="phase-tag">中期成長</span></td>
+          <td>AI学習機能、学校DX（全国2,322校に導入済）</td>
+          <td>EdTech新興企業の参入</td>
+        </tr>
+        <tr>
+          <td>ホットペッパー系</td>
+          <td><span class="phase-tag">成熟・ARPU向上</span></td>
+          <td>インバウンド需要、SaaS連携でLTV向上</td>
+          <td>市場飽和</td>
+        </tr>
+        <tr>
+          <td>Airビジネスツールズ</td>
+          <td><span class="phase-tag">浸透完了→ARPU向上</span></td>
+          <td>決済シェア拡大、新サービス追加</td>
+          <td>Square等競合の攻勢</td>
+        </tr>
+        <tr>
+          <td>人材派遣</td>
+          <td><span class="phase-tag">景気連動・安定</span></td>
+          <td>グローバル雇用需要</td>
+          <td>景気後退時の急速な収益低下</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SLIDE 7: RISKS -->
+<div class="slide">
+  <div class="slide-num">06 — Risks</div>
+  <h2 class="section-title">押さえ続けるための<br>リスクと課題</h2>
+  <p class="section-sub">4角を取ることより、取り続けることが難しい。</p>
+
+  <div class="risk-grid">
+    <div class="risk-item high">
+      <div class="r-label">Risk 01 — 最重要</div>
+      <h4>Googleによる仲介の排除</h4>
+      <p>GoogleがJob Search（検索結果への直接求人表示）を強化することで、Indeedへの有機流入が低下。長期的にはトラフィック依存から「採用ワークフロー統合型」への転換が必須。現在はSponsored Jobs（有料）へのシフトで対応中。</p>
+    </div>
+    <div class="risk-item high">
+      <div class="r-label">Risk 02 — 高</div>
+      <h4>AI採用ツールの民主化</h4>
+      <p>ChatGPT API等を使った採用最適化ツールが低コストで参入。リクルートの優位性（580億件の求職者プロフィール、雇用データ）を凌駕するAI企業が出てくるリスク。データの深さがどれだけ防壁になるかが焦点。</p>
+    </div>
+    <div class="risk-item">
+      <div class="r-label">Risk 03</div>
+      <h4>日本国内の人口減少</h4>
+      <p>マッチング&ソリューション事業は少子高齢化の直撃を受ける。リクナビ（新卒採用）は大学生数の減少に直結する構造問題。日本国内の市場規模縮小は長期的な天井として機能する。</p>
+    </div>
+    <div class="risk-item">
+      <div class="r-label">Risk 04</div>
+      <h4>Glassdoor統合リスク</h4>
+      <p>GlassdoorをIndeedに統合する過程でユーザー離脱が起きる可能性。「独立した口コミサイト」としての信頼性が損なわれると感じるユーザーが離れ、口コミデータの質が低下するリスク。</p>
+    </div>
+    <div class="risk-item">
+      <div class="r-label">Risk 05</div>
+      <h4>人材派遣の景気感応性</h4>
+      <p>Staffing SBUは景気後退時に急速に売上が落ちる。FY2023〜2024の米国HR Tech軟化のように、マクロ経済環境の影響を直接受ける。三事業中最大の売上高がここにあることが構造的リスク。</p>
+    </div>
+    <div class="risk-item">
+      <div class="r-label">Risk 06</div>
+      <h4>プラットフォームの「Amazon化」リスク</h4>
+      <p>Indeedが雇用市場を独占するほど、今度はリクルート自身が情報の非対称性を「生産」する側になる。独占プラットフォームが採用機会の配分を歪めるリスク。規制・レピュテーション両面での課題。</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: MOAT -->
+<div class="slide">
+  <div class="slide-num">07 — Moat</div>
+  <h2 class="section-title">持続的競争優位の<br>5つの源泉</h2>
+  <p class="section-sub">「4角を押さえ続ける」ためのお堀（Moat）はどこにあるか。</p>
+
+  <table class="moat-table">
+    <thead>
+      <tr>
+        <th>優位性の源泉</th>
+        <th>具体的内容</th>
+        <th>強度</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>データの規模と深さ</td>
+        <td>580億件の求職者プロフィール、60年分の採用・雇用マッチングデータ。AIモデルの学習データとして他社が追いつけないレベル。</td>
+        <td>非常に強い</td>
+      </tr>
+      <tr>
+        <td>ネットワーク効果</td>
+        <td>クロスサイド型：求職者増→企業価値増→企業増→求職者価値増。両面が揃うと競合が入り込めない。</td>
+        <td>非常に強い</td>
+      </tr>
+      <tr>
+        <td>スイッチングコスト</td>
+        <td>ATS統合（Indeed Connect）、Airシリーズへの業務依存により、企業・店舗側の乗り換えコストが極めて高い。</td>
+        <td>強い</td>
+      </tr>
+      <tr>
+        <td>ブランドと信頼</td>
+        <td>「仕事を探すならIndeed」「企業口コミはGlassdoor」という認知。60年の日本国内基盤と中小企業との関係性。</td>
+        <td>強い</td>
+      </tr>
+      <tr>
+        <td>GAFAが踏み込まない「最後の1マイル」</td>
+        <td>曖昧な要件のマッチング、信頼関係の構築、中小企業への個別対応。スケールより人的・文化的文脈が必要な領域。</td>
+        <td>中程度（変化しうる）</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SLIDE 9: SOCIAL CONTRIBUTION -->
+<div class="slide">
+  <div class="slide-num">08 — Social Impact</div>
+  <h2 class="section-title">リクルートは人類に<br>何をもたらすか</h2>
+  <p class="section-sub">GOがカーシェアで「移動→土地が栄える」連鎖を起こすように、リクルートが引き起こす連鎖とは。</p>
+
+  <div class="goal-row">
+    <div class="goal-cell">
+      <div class="g-label">2030年目標 — Goal 01</div>
+      <div class="g-num">1/2</div>
+      <p>就業までの時間を半分に（FY2021→FY2030）。転職・就職活動中の収入断絶期間の短縮は、個人の人生リスクを直接下げる。</p>
+    </div>
+    <div class="goal-cell">
+      <div class="g-label">2030年目標 — Goal 02</div>
+      <div class="g-num">3,000万人</div>
+      <p>「バリア持ち求職者」の就業支援（学歴・犯罪歴・障がい等）。FY2024時点で1,180万人達成済（目標の39%）。</p>
+    </div>
+  </div>
+
+  <div class="impact-layout">
+    <div class="impact-left">
+      <h2>雇用マッチングが<br>社会階層を<br>動かす</h2>
+      <p>活版印刷が宗教情報の独占を壊し宗教改革を起こしたように、Indeedのスキルベース採用は「学歴・経歴という代理変数」への依存を壊す可能性を持つ。</p>
+      <p>米国では既にIndeedで71%の求職者がスキルで照合されている。高偏差値大学出身でなくても、専門スキルで評価される市場が広がりつつある。</p>
+      <p style="font-size:13px; color: var(--light-grey);">「社会階層の再生産サイクル（学歴→就職→所得→子どもの教育）」が弱まる破壊的インパクト。</p>
+    </div>
+    <div>
+      <p style="font-family:'Poppins',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--light-grey); margin-bottom:20px;">雇用コスト低下の連鎖変化</p>
+      <div class="chain-flow">
+        <div class="chain-item">
+          <div class="chain-connector"><div class="chain-dot"></div><div class="chain-line"></div></div>
+          <div class="chain-text">採用コストが下がる（Smart Sourcing等）</div>
+        </div>
+        <div class="chain-item">
+          <div class="chain-connector"><div class="chain-dot"></div><div class="chain-line"></div></div>
+          <div class="chain-text">小規模企業・スタートアップが優秀な人材を採用しやすくなる</div>
+        </div>
+        <div class="chain-item">
+          <div class="chain-connector"><div class="chain-dot"></div><div class="chain-line"></div></div>
+          <div class="chain-text">地方・中小企業が人材競争に参加できるようになる</div>
+        </div>
+        <div class="chain-item">
+          <div class="chain-connector"><div class="chain-dot"></div><div class="chain-line"></div></div>
+          <div class="chain-text">地域経済・中小企業セクターの活性化</div>
+        </div>
+        <div class="chain-item">
+          <div class="chain-connector"><div class="chain-dot"></div><div class="chain-line"></div></div>
+          <div class="chain-text">都市集中が緩和される可能性</div>
+        </div>
+      </div>
+
+      <p style="font-family:'Poppins',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--light-grey); margin-top:36px; margin-bottom:20px;">企業口コミ普及の連鎖変化</p>
+      <div class="chain-flow">
+        <div class="chain-item">
+          <div class="chain-connector"><div class="chain-dot"></div><div class="chain-line"></div></div>
+          <div class="chain-text">Glassdoorで企業の実態が見えるようになる</div>
+        </div>
+        <div class="chain-item">
+          <div class="chain-connector"><div class="chain-dot"></div><div class="chain-line"></div></div>
+          <div class="chain-text">ブラック企業・低賃金企業が候補者に透けて見える</div>
+        </div>
+        <div class="chain-item">
+          <div class="chain-connector"><div class="chain-dot"></div><div class="chain-line"></div></div>
+          <div class="chain-text">不誠実な経営への市場圧力が増す</div>
+        </div>
+        <div class="chain-item">
+          <div class="chain-connector"><div class="chain-dot"></div></div>
+          <div class="chain-text"><strong>労働環境全体の底上げ</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: CLOSING -->
+<div class="closing">
+  <div class="q-mark">"</div>
+  <h2>
+    媒体は変わっても、<br>
+    「個人と社会をつなぐ」<br>
+    本業は一度もブレていない。
+  </h2>
+  <p class="closer-body">
+    リクルートが戦っているのは求人サイトの競争ではない。
+    「誰がどこで働くか」という人生最大の決定に関わる
+    情報の非対称性を壊すことだ。<br><br>
+    活版印刷、電報、インターネット——情報の非対称性を壊したテクノロジーは
+    いつも社会構造を変えてきた。
+    Indeedのスキルベース採用が次の変革を起こすかどうか、
+    まだ答えは出ていない。
+  </p>
+  <div class="divider"></div>
+  <div class="footer-note">Recruit HD Analysis — Sources: IR材料・Annual Report・Indeed公式 / 2026.04</div>
+</div>
+
+</body>
+</html>
