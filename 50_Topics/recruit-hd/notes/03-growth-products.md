@@ -161,6 +161,6 @@ Airシフト・Airリザーブ等のSaaSで月額収入
 
 ## 関連ノート
 
-- [[Topics/recruit-hd/notes/01-business-overview]] — 事業概要・歴史
-- [[Topics/recruit-hd/notes/02-competitive-strategy]] — 競争戦略・4角・オセロ構造
-- [[Topics/recruit-hd/notes/04-social-contribution]] — 社会への貢献
+- [[50_Topics/recruit-hd/notes/01-business-overview]] — 事業概要・歴史
+- [[50_Topics/recruit-hd/notes/02-competitive-strategy]] — 競争戦略・4角・オセロ構造
+- [[50_Topics/recruit-hd/notes/04-social-contribution]] — 社会への貢献

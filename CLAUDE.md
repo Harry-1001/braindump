@@ -9,29 +9,27 @@ Claude Code automates research and organization workflows.
 /
 ├── Inbox.md          # Topic words for research (one per line)
 ├── Work/             # Wanderlust internship notes, feedback, meetings
-├── School/           # WASEDA class notes, assignments
-├── Life/             # Journal, profile, personal thoughts
-├── Topics/           # Deep research (curiosity-driven, cross-domain)
-├── Writing/          # note.com articles (drafts & published)
-├── People/           # Notes on specific individuals
-├── Books/            # Reading notes
-├── recruiting/       # Job hunting materials
-├── Maps/             # Maps of Content (MOCs)
-├── Templates/        # Obsidian templates
-├── Archive/          # Paused or completed work
+├── 10_Life/          # Journal, profile, personal thoughts
+├── 20_People/        # Notes on specific individuals
+├── 30_Books/         # Reading notes
+├── 40_recruiting/    # Job hunting materials
+├── 50_Topics/        # Deep research (curiosity-driven, cross-domain)
+├── 80_Writing/       # note.com articles (drafts & published)
+├── 90_Maps/          # Maps of Content (MOCs)
+├── 95_Templates/     # Obsidian templates
+├── 99_Archive/       # Paused or completed work
 └── .claude/skills/   # Claude Code automation skills
 ```
 
 ## Domain Routing
 When creating or saving notes, route by context:
 - **Work/** — internship, clients, business tasks, feedback
-- **School/** — lectures, assignments, academic research
-- **Life/** — journal, goals, reflections, daily thoughts
-- **Topics/** — deep research spanning domains or curiosity-driven
-- **Writing/** — note.com article drafts and published pieces
-- **People/** — notes on specific individuals
-- **Books/** — reading notes and summaries
-- **recruiting/** — job hunting, case prep, company research
+- **10_Life/** — journal, goals, reflections, daily thoughts
+- **20_People/** — notes on specific individuals
+- **30_Books/** — reading notes and summaries
+- **40_recruiting/** — job hunting, case prep, company research
+- **50_Topics/** — deep research spanning domains or curiosity-driven
+- **80_Writing/** — note.com article drafts and published pieces
 
 ## Global Conventions
 - All files are Markdown (.md), Obsidian-compatible

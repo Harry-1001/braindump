@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>心身の健康 — ホルモン・GI値・モーニングルーティーン</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #1a1a1a;
+    --mid: #444;
+    --grey: #888;
+    --light-grey: #bbb;
+    --border: #ddd;
+    --off-white: #f5f5f5;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+  }
+
+  .slide {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 10%;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .slide-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--light-grey);
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+
+  /* COVER */
+  .cover {
+    background: var(--black);
+    color: var(--white);
+    padding: 80px 10%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cover .eyebrow {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--grey);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  .cover h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+
+  .cover h1 span { color: var(--grey); }
+
+  .cover .subtitle {
+    font-size: 18px;
+    color: var(--grey);
+    font-weight: 300;
+    max-width: 600px;
+    margin-bottom: 64px;
+    line-height: 1.7;
+  }
+
+  .cover .thesis-box {
+    border-left: 3px solid var(--white);
+    padding: 20px 28px;
+    background: rgba(255,255,255,0.05);
+    max-width: 700px;
+  }
+
+  .cover .thesis-box p {
+    font-size: 16px;
+    color: #ccc;
+    line-height: 1.8;
+  }
+
+  /* SECTION HEADING */
+  h2.section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: var(--black);
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--grey);
+    max-width: 640px;
+    margin-bottom: 56px;
+    line-height: 1.8;
+  }
+
+  /* HORMONE CARDS */
+  .hormone-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .hormone-card {
+    padding: 32px 24px;
+    border-right: 1px solid var(--border);
+  }
+
+  .hormone-card:last-child { border-right: none; }
+
+  .hormone-card .h-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light-grey);
+    margin-bottom: 16px;
+  }
+
+  .hormone-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+
+  .hormone-card .ja-name {
+    font-size: 11px;
+    color: var(--light-grey);
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  .hormone-card .role {
+    font-size: 12px;
+    color: var(--dark);
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .hormone-card p {
+    font-size: 12px;
+    color: var(--grey);
+    line-height: 1.7;
+  }
+
+  .hormone-card .trigger {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .hormone-card .trigger-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light-grey);
+    margin-bottom: 6px;
+  }
+
+  .hormone-card .trigger p {
+    font-size: 11px;
+    color: var(--mid);
+  }
+
+  /* CASCADE */
+  .cascade-box {
+    border: 1px solid var(--border);
+    padding: 40px;
+    max-width: 860px;
+    margin-bottom: 0;
+  }
+
+  .cascade-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 8px;
+  }
+
+  .cascade-row:last-child { margin-bottom: 0; }
+
+  .c-step {
+    padding: 14px 20px;
+    background: var(--off-white);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark);
+    flex: 1;
+    text-align: center;
+  }
+
+  .c-arrow {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--light-grey);
+    padding: 0 12px;
+    flex-shrink: 0;
+  }
+
+  .c-label {
+    font-size: 11px;
+    color: var(--grey);
+    padding: 14px 0;
+    min-width: 200px;
+    padding-left: 20px;
+  }
+
+  /* GI TABLE */
+  .gi-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+
+  .gi-col {
+    background: var(--white);
+    padding: 32px;
+  }
+
+  .gi-col .col-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--light-grey);
+    margin-bottom: 24px;
+  }
+
+  .gi-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .gi-item:last-child { border-bottom: none; }
+
+  .gi-item .food { color: var(--dark); font-weight: 500; }
+  .gi-item .score {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--mid);
+  }
+
+  .gi-tip {
+    background: var(--off-white);
+    padding: 24px 32px;
+    max-width: 860px;
+  }
+
+  .gi-tip p {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.8;
+  }
+
+  .gi-tip strong { color: var(--black); font-weight: 700; }
+
+  /* DRINK TABLE */
+  .drink-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+
+  .drink-card {
+    padding: 28px 20px;
+    border-right: 1px solid var(--border);
+  }
+
+  .drink-card:last-child { border-right: none; }
+
+  .drink-card .d-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+
+  .drink-card .d-caffeine {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--light-grey);
+    margin-bottom: 14px;
+  }
+
+  .drink-card p {
+    font-size: 12px;
+    color: var(--grey);
+    line-height: 1.7;
+  }
+
+  .drink-card.recommended {
+    background: var(--off-white);
+  }
+
+  .drink-card .rec-badge {
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--black);
+    border: 1px solid var(--black);
+    display: inline-block;
+    padding: 2px 8px;
+    margin-bottom: 12px;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    max-width: 860px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 72px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .tl-item {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  .tl-block {
+    border-bottom: 1px solid var(--border);
+    padding: 28px 0;
+    display: flex;
+    gap: 40px;
+    width: 100%;
+  }
+
+  .tl-item:last-child .tl-block { border-bottom: none; }
+
+  .tl-time {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--mid);
+    min-width: 56px;
+    text-align: right;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .tl-dot {
+    position: absolute;
+    left: 68px;
+    top: 36px;
+    width: 9px;
+    height: 9px;
+    background: var(--black);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .tl-content {
+    padding-left: 24px;
+    flex: 1;
+  }
+
+  .tl-content h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--dark);
+  }
+
+  .tl-content .tl-desc {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+
+  .tl-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .tl-tag {
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--grey);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+  }
+
+  /* KEY INSIGHT BOX */
+  .insight-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 48px;
+  }
+
+  .insight-card {
+    background: var(--white);
+    padding: 32px;
+  }
+
+  .insight-card .i-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .insight-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .insight-card p {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  .footer {
+    padding: 40px 10%;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    color: var(--light-grey);
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 768px) {
+    .hormone-grid { grid-template-columns: 1fr 1fr; }
+    .drink-grid { grid-template-columns: 1fr 1fr; }
+    .gi-split { grid-template-columns: 1fr; }
+    .insight-row { grid-template-columns: 1fr; }
+    .cascade-row { flex-direction: column; gap: 4px; }
+    .c-label { padding-left: 0; min-width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="eyebrow">Health Research — 2026.04.12</div>
+  <h1>Morning<br><span>Routine Design</span></h1>
+  <p class="subtitle">ホルモン・GI値の科学から逆算する、<br>最適な朝の過ごし方</p>
+  <div class="thesis-box">
+    <p>コルチゾール・セロトニン・ドーパミン・オキシトシン・メラトニン。<br>
+    5つのホルモンの働きを理解し、食事のGI値を整えることで、<br>
+    午前中のパフォーマンスは構造的に改善できる。</p>
+  </div>
+</div>
+
+<!-- SECTION 1: HORMONES -->
+<div class="slide">
+  <div class="slide-num">01 — Hormones</div>
+  <h2 class="section-title">5つのホルモンと<br>朝の関係</h2>
+  <p class="section-sub">それぞれが独立しているのではなく、連鎖して働く。どのホルモンをどの順番で活性化するかが鍵。</p>
+
+  <div class="hormone-grid">
+    <div class="hormone-card">
+      <div class="h-num">01</div>
+      <h3>Cortisol</h3>
+      <div class="ja-name">コルチゾール</div>
+      <div class="role">覚醒・代謝促進・免疫調節</div>
+      <p>「起動ホルモン」。起床後30〜60分でピークに達し、身体を活動モードへ切り替える。</p>
+      <div class="trigger">
+        <div class="trigger-label">朝のNG</div>
+        <p>起床直後のカフェインはこのピークを邪魔する。自然ピーク後（90分以降）に摂取すると効果が最大化される。</p>
+      </div>
+    </div>
+
+    <div class="hormone-card">
+      <div class="h-num">02</div>
+      <h3>Serotonin</h3>
+      <div class="ja-name">セロトニン</div>
+      <div class="role">精神安定・集中・幸福感の基盤</div>
+      <p>夜のメラトニンの前駆体。朝にセロトニンを十分分泌することが、夜の良質な睡眠に直結する。</p>
+      <div class="trigger">
+        <div class="trigger-label">分泌トリガー</div>
+        <p>太陽光・有酸素運動・食事（トリプトファン）</p>
+      </div>
+    </div>
+
+    <div class="hormone-card">
+      <div class="h-num">03</div>
+      <h3>Dopamine</h3>
+      <div class="ja-name">ドーパミン</div>
+      <div class="role">意欲・達成感・集中力</div>
+      <p>報酬系ホルモン。朝に小さな「達成」を設計することで分泌され、その日の行動力が上がる。</p>
+      <div class="trigger">
+        <div class="trigger-label">分泌トリガー</div>
+        <p>目標設定・達成体験・タンパク質摂取（チロシン）</p>
+      </div>
+    </div>
+
+    <div class="hormone-card">
+      <div class="h-num">04</div>
+      <h3>Oxytocin</h3>
+      <div class="ja-name">オキシトシン</div>
+      <div class="role">つながり・信頼・ストレス軽減</div>
+      <p>「つながりホルモン」。ストレスホルモン（コルチゾール過多）を抑える働きもある。</p>
+      <div class="trigger">
+        <div class="trigger-label">分泌トリガー</div>
+        <p>人・ペットとの接触、感謝を感じる体験</p>
+      </div>
+    </div>
+
+    <div class="hormone-card">
+      <div class="h-num">05</div>
+      <h3>Melatonin</h3>
+      <div class="ja-name">メラトニン</div>
+      <div class="role">睡眠・体内時計の調整</div>
+      <p>朝に強い光を浴びることで分泌が抑制され、14〜16時間後の再分泌タイミングがリセットされる。</p>
+      <div class="trigger">
+        <div class="trigger-label">朝の役割</div>
+        <p>朝の光浴びで「夜にいつ眠くなるか」が決まる</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASCADE -->
+  <p style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--light-grey);margin-bottom:20px;">Hormone Cascade</p>
+  <div class="cascade-box">
+    <div class="cascade-row">
+      <div class="c-step">朝の光浴び</div>
+      <div class="c-arrow">→</div>
+      <div class="c-step">セロトニン分泌</div>
+      <div class="c-arrow">→</div>
+      <div class="c-step">夜にメラトニン変換</div>
+      <div class="c-label">良質な睡眠サイクルの形成</div>
+    </div>
+    <div class="cascade-row">
+      <div class="c-step">コルチゾール自然ピーク</div>
+      <div class="c-arrow">→</div>
+      <div class="c-step">90分後にカフェイン</div>
+      <div class="c-arrow">→</div>
+      <div class="c-step">覚醒効果の最大化</div>
+      <div class="c-label">カフェインとコルチゾールを重ねない</div>
+    </div>
+    <div class="cascade-row">
+      <div class="c-step">有酸素運動</div>
+      <div class="c-arrow">→</div>
+      <div class="c-step">セロトニン + エンドルフィン</div>
+      <div class="c-arrow">→</div>
+      <div class="c-step">気分・集中力の向上</div>
+      <div class="c-label">光浴びと組み合わせでダブル効果</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: GI VALUE -->
+<div class="slide">
+  <div class="slide-num">02 — GI Value</div>
+  <h2 class="section-title">GI値と<br>血糖値スパイク</h2>
+  <p class="section-sub">GI（グリセミック指数）は食後の血糖値上昇速度を示す指標。朝食の選択が午前中のパフォーマンスを直接左右する。</p>
+
+  <div class="gi-split">
+    <div class="gi-col">
+      <div class="col-label">High GI — 避けたい</div>
+      <div class="gi-item"><span class="food">食パン（白）</span><span class="score">95</span></div>
+      <div class="gi-item"><span class="food">白米</span><span class="score">84</span></div>
+      <div class="gi-item"><span class="food">コーンフレーク</span><span class="score">81</span></div>
+      <div class="gi-item"><span class="food">フルーツジュース</span><span class="score">75〜</span></div>
+      <div class="gi-item"><span class="food">砂糖入りヨーグルト</span><span class="score">62</span></div>
+      <p style="font-size:12px;color:var(--grey);margin-top:20px;line-height:1.7;">急激な血糖上昇→インスリンスパイク→血糖急降下。午前中に眠気・集中力低下が起きやすい。</p>
+    </div>
+    <div class="gi-col">
+      <div class="col-label">Low GI — 推奨</div>
+      <div class="gi-item"><span class="food">卵（全卵）</span><span class="score">30</span></div>
+      <div class="gi-item"><span class="food">無糖ヨーグルト</span><span class="score">25〜36</span></div>
+      <div class="gi-item"><span class="food">オートミール</span><span class="score">55</span></div>
+      <div class="gi-item"><span class="food">全粒粉パン</span><span class="score">50〜55</span></div>
+      <div class="gi-item"><span class="food">ナッツ類・アボカド</span><span class="score">15〜</span></div>
+      <p style="font-size:12px;color:var(--grey);margin-top:20px;line-height:1.7;">緩やかに血糖値が上がり持続する。タンパク質・脂質・食物繊維が血糖の急上昇を抑える。</p>
+    </div>
+  </div>
+
+  <div class="gi-tip">
+    <p><strong>血糖スパイクを防ぐ食べ方：</strong><br>
+    野菜・タンパク質を先に食べる（ベジファースト）→ 糖質は最後、量を絞る → よく噛む（20回以上）<br>
+    組み合わせが大事で、高GI食品でも食物繊維・脂質と一緒に食べることでGIを下げられる。</p>
+  </div>
+</div>
+
+<!-- SECTION 3: COFFEE ALTERNATIVE -->
+<div class="slide">
+  <div class="slide-num">03 — Caffeine Alternative</div>
+  <h2 class="section-title">コーヒーなしで<br>覚醒する</h2>
+  <p class="section-sub">コーヒーが飲めなくても、覚醒・集中のための選択肢は複数ある。目的と体質に応じて選ぶ。</p>
+
+  <div class="drink-grid">
+    <div class="drink-card recommended">
+      <div class="rec-badge">Recommended</div>
+      <div class="d-name">緑茶</div>
+      <div class="d-caffeine">Caffeine — Mild</div>
+      <p>カフェイン＋L-テアニンの組み合わせが独自の効果を生む。コーヒーのような「ジリジリ感」なく、穏やかで持続する集中と覚醒が得られる。</p>
+    </div>
+
+    <div class="drink-card">
+      <div class="d-name">紅茶</div>
+      <div class="d-caffeine">Caffeine — Moderate</div>
+      <p>緑茶より強いカフェイン量。香りによるリラックス効果も。アッサムやイングリッシュブレックファストが覚醒向き。</p>
+    </div>
+
+    <div class="drink-card">
+      <div class="d-name">マテ茶</div>
+      <div class="d-caffeine">Caffeine — High</div>
+      <p>コーヒーに最も近いカフェイン量。ビタミン・ミネラルが豊富で、南米では「飲む野菜」とも呼ばれる。</p>
+    </div>
+
+    <div class="drink-card">
+      <div class="d-name">ルイボスティー</div>
+      <div class="d-caffeine">Caffeine — None</div>
+      <p>ノンカフェイン。抗酸化物質（スーパーオキシドジスムターゼ）が豊富。カフェイン自体が苦手な場合の選択肢。朝夜問わず飲める。</p>
+    </div>
+
+    <div class="drink-card">
+      <div class="d-name">白湯 / レモン水</div>
+      <div class="d-caffeine">Caffeine — None</div>
+      <p>起床直後の胃腸起動に最適。肝臓のデトックス促進、体温上昇による代謝活性化。カフェイン前のウォームアップとして使う。</p>
+    </div>
+  </div>
+
+  <p style="font-size:13px;color:var(--grey);margin-top:24px;line-height:1.8;">
+    カフェインが苦手（胃腸・動悸・過敏）なら：<strong style="color:var(--dark);">白湯 → ルイボスティー</strong> の組み合わせが無理のない選択。<br>
+    味が苦手なだけなら：<strong style="color:var(--dark);">緑茶（薄め）</strong> から始めて徐々に慣らすのも一手。
+  </p>
+</div>
+
+<!-- SECTION 4: ROUTINE -->
+<div class="slide">
+  <div class="slide-num">04 — Routine Design</div>
+  <h2 class="section-title">提案：<br>最適モーニングルーティーン</h2>
+  <p class="section-sub">現在のルーティーンはすでに良い構造。3点の調整で科学的な最適化が完成する。</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-block">
+        <div class="tl-time">06:45</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h4>起床 + 光浴び + 白湯</h4>
+          <p class="tl-desc">起きたらすぐカーテンを開け、窓越しで2〜5分太陽光を浴びる。同時にコップ1杯の白湯か常温水。光がメラトニン分泌を止め、その日の睡眠タイマーをリセットする。</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Melatonin Reset</span>
+            <span class="tl-tag">Serotonin Trigger</span>
+            <span class="tl-tag">Hydration</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-block">
+        <div class="tl-time">07:00</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h4>ランニング（屋外推奨）</h4>
+          <p class="tl-desc">コルチゾールピーク時間帯 × 有酸素運動の組み合わせ。セロトニン・エンドルフィンが分泌され、気分と集中力の基盤が作られる。屋外なら光浴びと同時に行えてさらに効果的。</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Cortisol Peak</span>
+            <span class="tl-tag">Serotonin</span>
+            <span class="tl-tag">Endorphin</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-block">
+        <div class="tl-time">08:00</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h4>朝食（低GI構成）</h4>
+          <p class="tl-desc">タンパク質を中心に、食物繊維・良質な脂質を合わせる。糖質は量を絞り最後に食べる。血糖スパイクを防ぐことで午前中の眠気・集中力低下を防げる。</p>
+          <div class="tl-tags" style="margin-bottom:12px;">
+            <span class="tl-tag">Low GI</span>
+            <span class="tl-tag">Protein</span>
+            <span class="tl-tag">Fiber</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px;">
+            <div style="background:var(--off-white);padding:12px;font-size:11px;color:var(--mid);">
+              <strong style="display:block;font-size:10px;letter-spacing:1px;color:var(--grey);margin-bottom:4px;">PROTEIN</strong>
+              卵・無糖ヨーグルト・豆腐・納豆
+            </div>
+            <div style="background:var(--off-white);padding:12px;font-size:11px;color:var(--mid);">
+              <strong style="display:block;font-size:10px;letter-spacing:1px;color:var(--grey);margin-bottom:4px;">FIBER</strong>
+              野菜・オートミール・全粒粉パン
+            </div>
+            <div style="background:var(--off-white);padding:12px;font-size:11px;color:var(--mid);">
+              <strong style="display:block;font-size:10px;letter-spacing:1px;color:var(--grey);margin-bottom:4px;">FAT</strong>
+              ナッツ・アボカド・オリーブオイル
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-block">
+        <div class="tl-time">08:30</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h4>シャワー</h4>
+          <p class="tl-desc">体温変化が覚醒をさらに促進する。冷水を最後に少し浴びると交感神経が活性化してより効果的（任意）。</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Alertness</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-block">
+        <div class="tl-time">08:45</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h4>緑茶 + 今日の小目標を1つ設定</h4>
+          <p class="tl-desc">起床後約2時間 = コルチゾール自然低下後。カフェインがアデノシン受容体をブロックする効果が最大になるタイミング。同時に今日の「これだけはやる」を1つ書き出す。小さな達成の設計がドーパミン分泌のトリガーになる。</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Caffeine Optimal</span>
+            <span class="tl-tag">Dopamine Design</span>
+            <span class="tl-tag">Focus</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY INSIGHTS -->
+  <div class="insight-row">
+    <div class="insight-card">
+      <div class="i-num">01</div>
+      <h4>朝イチの光浴びを<br>意識的に追加する</h4>
+      <p>ランニング前の2〜3分だけでもいい。セロトニン→メラトニンのサイクルに大きく効く。ランニングが屋外なら自然と達成される。</p>
+    </div>
+    <div class="insight-card">
+      <div class="i-num">02</div>
+      <h4>朝食のGI値を<br>意識して下げる</h4>
+      <p>今食べているものが高GI中心なら、タンパク質と野菜を先に食べるだけでも血糖スパイクは大幅に改善できる。</p>
+    </div>
+    <div class="insight-card">
+      <div class="i-num">03</div>
+      <h4>緑茶のタイミングは<br>起床後90分以降を守る</h4>
+      <p>コルチゾールの自然ピークを邪魔しないことが最重要。現在の8:45は理想的なタイミング。これだけは崩さない。</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>Morning Routine Design — Health Research</p>
+  <p>2026.04.12</p>
+</div>
+
+</body>
+</html>

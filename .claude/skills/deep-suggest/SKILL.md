@@ -7,7 +7,7 @@ You are analyzing existing research in this vault and suggesting additional rese
 
 ## Steps
 
-1. **Analyze existing research**: Read all `Topics/*/_index.md` files and their notes to understand:
+1. **Analyze existing research**: Read all `50_Topics/*/_index.md` files and their notes to understand:
    - What topics have been researched
    - What key questions have been answered vs. remain open
    - What themes and connections exist across topics

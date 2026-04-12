@@ -9,7 +9,7 @@ You are organizing random thoughts in the `Thoughts/` directory. The cardinal ru
 
 1. **Read all thoughts**: Scan `Thoughts/` for `.md` files. If `$ARGUMENTS` is provided, only process those specific files.
 
-2. **Read existing vault context**: Scan `Topics/` to understand what research exists in the vault, so you can connect thoughts to existing knowledge.
+2. **Read existing vault context**: Scan `50_Topics/` to understand what research exists in the vault, so you can connect thoughts to existing knowledge.
 
 3. **For each thought file**, enhance it minimally and respectfully:
 

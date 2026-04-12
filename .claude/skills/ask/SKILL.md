@@ -10,7 +10,7 @@ You are having a casual research conversation. The user asks a question (via `$A
 1. **Understand the question**: Parse `$ARGUMENTS` as a natural question or topic phrase (e.g., "what's a megabank in Japan?", "explain transformer architecture", "tell me more about Japanese megabanks").
 
 2. **Search the vault for context**:
-   - Search `Topics/` for any existing research related to the question using Grep and Glob.
+   - Search `50_Topics/` for any existing research related to the question using Grep and Glob.
    - Read relevant `_index.md`, notes, and references if found.
    - Search `Thoughts/` for any related thoughts.
    - This vault context should inform and enrich your answer.
@@ -26,12 +26,12 @@ You are having a casual research conversation. The user asks a question (via `$A
 
 5. **Save findings to the vault**:
 
-   a. **Determine the topic folder**: Find the best matching existing topic under `Topics/`. If none exists, create a new topic:
-      - Create `Topics/<topic-name>/`, `Topics/<topic-name>/notes/`, `Topics/<topic-name>/references/`
+   a. **Determine the topic folder**: Find the best matching existing topic under `50_Topics/`. If none exists, create a new topic:
+      - Create `50_Topics/<topic-name>/`, `50_Topics/<topic-name>/notes/`, `50_Topics/<topic-name>/references/`
       - Add `.gitkeep` files in `notes/` and `references/`
-      - Create `Topics/<topic-name>/_index.md` with `status: active` and proper frontmatter using the topic template format.
+      - Create `50_Topics/<topic-name>/_index.md` with `status: active` and proper frontmatter using the topic template format.
 
-   b. **Create a research note** in `Topics/<topic>/notes/`:
+   b. **Create a research note** in `50_Topics/<topic>/notes/`:
       - Filename: descriptive, based on the question (e.g., `what-is-a-megabank.md`)
       - Use the note template format with proper frontmatter:
         ```
@@ -49,7 +49,7 @@ You are having a casual research conversation. The user asks a question (via `$A
       - **References**: Sources used (with links)
       - Add `[[wikilinks]]` to related topics
 
-   c. **Create reference files** in `Topics/<topic>/references/` if web sources were used:
+   c. **Create reference files** in `50_Topics/<topic>/references/` if web sources were used:
       - One file per source, using the reference template format
       - Only for sources that were actually fetched and read — skip this if only using general knowledge
 

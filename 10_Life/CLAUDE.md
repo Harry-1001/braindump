@@ -2,7 +2,7 @@
 
 ## Structure
 ```
-Life/
+10_Life/
   profile/
     me.md       # 性格・価値観・気質
     goals.md    # 目標・目指す先

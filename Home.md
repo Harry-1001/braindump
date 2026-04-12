@@ -54,10 +54,10 @@ SORT file.mtime DESC
 ```
 
 ## Maps of Content
-- [[Maps/index|All Maps]]
+- [[90_Maps/index|All Maps]]
 
 ## Quick Links
-- [[Templates/topic-template|New Topic Template]]
-- [[Templates/note-template|New Note Template]]
-- [[Templates/reference-template|New Reference Template]]
-- [[Archive/|Archive]]
+- [[95_Templates/topic-template|New Topic Template]]
+- [[95_Templates/note-template|New Note Template]]
+- [[95_Templates/reference-template|New Reference Template]]
+- [[99_Archive/|Archive]]

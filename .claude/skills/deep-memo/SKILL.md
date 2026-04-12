@@ -11,7 +11,7 @@ You are adding topic words to `Inbox.md` so the user can research them later wit
 
 2. **Read Inbox.md**: Read `Inbox.md` at the repo root.
 
-3. **Check for duplicates**: Skip any topic that already exists in `Inbox.md` or as a folder under `Topics/`. Tell the user if any were skipped.
+3. **Check for duplicates**: Skip any topic that already exists in `Inbox.md` or as a folder under `50_Topics/`. Tell the user if any were skipped.
 
 4. **Append to Inbox.md**: Add each new topic word as a new line at the end of the file.
 
