@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>フェミニズム リサーチレポート — 2026年4月19日</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #111111;
+      --white: #ffffff;
+      --light-gray: #f5f5f5;
+      --mid-gray: #888888;
+      --border: #dddddd;
+    }
+
+    body {
+      font-family: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho", "YuMincho", Georgia, serif;
+      font-size: 17px;
+      line-height: 1.9;
+      color: var(--black);
+      background-color: var(--white);
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .report-header {
+      padding-bottom: 3rem;
+      border-bottom: 2px solid var(--black);
+      margin-bottom: 3.5rem;
+    }
+
+    .report-meta {
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .report-title {
+      font-size: 2.2rem;
+      font-weight: normal;
+      line-height: 1.3;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.8rem;
+    }
+
+    .report-subtitle {
+      font-size: 1rem;
+      color: var(--mid-gray);
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* Overview */
+    .overview {
+      background-color: var(--light-gray);
+      padding: 2rem 2.2rem;
+      margin-bottom: 3.5rem;
+      border-left: 3px solid var(--black);
+    }
+
+    .overview p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.95;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+
+    .section-number {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      font-weight: normal;
+      letter-spacing: 0.05em;
+      line-height: 1.4;
+      margin-bottom: 2rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--black);
+    }
+
+    /* Subsection */
+    h3 {
+      font-size: 1.05rem;
+      font-weight: normal;
+      letter-spacing: 0.08em;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+      color: var(--black);
+      font-style: italic;
+    }
+
+    h4 {
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-top: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Wave articles */
+    .wave-block {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .wave-block:last-child {
+      border-bottom: none;
+    }
+
+    .wave-label {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 0.3rem;
+    }
+
+    .wave-title {
+      font-size: 1.05rem;
+      font-weight: normal;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+
+    /* Theory comparison */
+    .theory-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .theory-card {
+      background-color: var(--light-gray);
+      padding: 1.4rem;
+    }
+
+    .theory-card-label {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 0.4rem;
+    }
+
+    .theory-card-title {
+      font-size: 1rem;
+      font-weight: normal;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.03em;
+    }
+
+    .theory-card p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #333;
+    }
+
+    /* Data table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 15px;
+    }
+
+    .data-table th {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      border-bottom: 2px solid var(--black);
+      padding: 0.5rem 0.8rem;
+      text-align: left;
+      font-weight: normal;
+    }
+
+    .data-table td {
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 0.8rem;
+      line-height: 1.5;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Person profiles */
+    .person-block {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .person-block:last-child {
+      border-bottom: none;
+    }
+
+    .person-name {
+      font-size: 1.05rem;
+      font-weight: normal;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+
+    .person-meta {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 11px;
+      color: var(--mid-gray);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+    }
+
+    /* Critique block */
+    .critique-item {
+      margin: 1.5rem 0;
+      padding: 1.2rem 1.5rem;
+      border-left: 2px solid var(--border);
+    }
+
+    .critique-claim {
+      font-size: 14px;
+      color: var(--mid-gray);
+      margin-bottom: 0.6rem;
+      font-style: italic;
+    }
+
+    .critique-response {
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    /* Insight boxes */
+    .insight {
+      margin: 2rem 0;
+      padding: 1.5rem 2rem;
+      border: 1px solid var(--black);
+    }
+
+    .insight-label {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 0.6rem;
+    }
+
+    .insight p {
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    /* References */
+    .references {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .references h2 {
+      font-size: 0.85rem;
+      font-weight: normal;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-bottom: 1.2rem;
+    }
+
+    .references ol {
+      padding-left: 1.2rem;
+    }
+
+    .references li {
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+      color: #444;
+    }
+
+    .references a {
+      color: var(--black);
+    }
+
+    /* General text */
+    p {
+      margin-bottom: 1.2rem;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Footer */
+    .report-footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid var(--black);
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      text-align: right;
+    }
+
+    @media (max-width: 600px) {
+      .theory-grid {
+        grid-template-columns: 1fr;
+      }
+      body {
+        font-size: 16px;
+      }
+      .report-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="report-header">
+      <p class="report-meta">Research Report &mdash; 2026.04.19</p>
+      <h1 class="report-title">フェミニズム</h1>
+      <p class="report-subtitle">思想史・理論潮流・運動と実践・日本の文脈・批判と応答</p>
+    </header>
+
+    <!-- Overview -->
+    <div class="overview">
+      <p>フェミニズムは「女性の権利・平等の実現を目指す思想と運動の総体」と定義されることが多いが、それは単一の主義・主張ではない。19世紀の参政権運動から現代のデジタルアクティビズムまで、「誰が・何によって・なぜ抑圧されているか」という問いをめぐって絶えず自己更新してきた知的・政治的運動である。</p>
+    </div>
+
+    <!-- Section 1: Waves and History -->
+    <section class="section">
+      <span class="section-number">Section 01</span>
+      <h2 class="section-title">思想史——四つの波</h2>
+
+      <div class="wave-block">
+        <p class="wave-label">First Wave</p>
+        <p class="wave-title">第一波（19世紀末〜20世紀初頭）：法的平等の追求</p>
+        <p>産業革命後の近代市民社会において、女性は参政権・財産権・教育権を持たず、法的に男性の従属物として扱われた。奴隷解放運動と並走しながら、アメリカ・イギリスを先駆けとして展開した。</p>
+        <p>1848年のセネカ・フォールズ会議が象徴的起点。アメリカ1920年、イギリス1928年に女性参政権が完全成立した。しかし運動の中心が白人中産階級女性に偏り、黒人・労働者階級女性の経験を周縁化した限界もあった。</p>
+      </div>
+
+      <div class="wave-block">
+        <p class="wave-label">Second Wave</p>
+        <p class="wave-title">第二波（1960年代後半〜1980年代）：私的領域の政治化</p>
+        <p>「個人的なことは政治的なこと」——家事・育児・性・生殖の自由を政治問題として可視化した。ベティ・フリーダン『女性らしさの神話』（1963）が火付け役。雇用機会均等法制定・中絶権の一定確立を達成する一方、「女性の経験」を普遍化しすぎた。黒人・レズビアン・労働者階級女性から「あなたたちが語る女性は誰のことか」という批判が噴出し、交差性フェミニズムへの扉が開かれた。</p>
+      </div>
+
+      <div class="wave-block">
+        <p class="wave-label">Third Wave</p>
+        <p class="wave-title">第三波（1990年代〜2000年代）：多様性と交差性</p>
+        <p>インターセクショナリティ（交差性）・ダイバーシティを重視し、個人の主体性を尊重する方向へ転換。ジェンダー・人種・階級・セクシュアリティは分離して論じられないという認識が広まった。ポストコロニアル・フェミニズムや、ジュディス・バトラーのジェンダー・パフォーマティヴィティ理論もこの時代に確立された。</p>
+      </div>
+
+      <div class="wave-block">
+        <p class="wave-label">Fourth Wave</p>
+        <p class="wave-title">第四波（2010年代後半〜）：デジタルアクティビズム</p>
+        <p>#MeToo（2017）を象徴とする、SNSを通じたグローバルな連帯の時代。地理・国境を超えたリアルタイムの運動が可能になった。日本では #KuToo 運動（職場ヒール強制への抗議、2019年）が代表例。一方でSNSの炎上構造が「フェミ」の蔑称化とバックラッシュを加速させる場にもなった。</p>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Section 2: Theoretical Currents -->
+    <section class="section">
+      <span class="section-number">Section 02</span>
+      <h2 class="section-title">理論潮流——何が抑圧の根源か</h2>
+
+      <p>フェミニズムの各理論潮流は「女性への抑圧の根源は何か」という問いに対し、異なる診断と処方箋を持つ。</p>
+
+      <div class="theory-grid">
+        <div class="theory-card">
+          <p class="theory-card-label">Liberal Feminism</p>
+          <p class="theory-card-title">リベラルフェミニズム</p>
+          <p>法的・制度的な権利・機会の不平等が根源。制度改革による段階的な平等化を目指す。代表：ウルストンクラフト、フリーダン。批判：資本主義・国家システムを前提としているため構造的批判に届かない。</p>
+        </div>
+        <div class="theory-card">
+          <p class="theory-card-label">Radical Feminism</p>
+          <p class="theory-card-title">ラディカルフェミニズム</p>
+          <p>家父長制が社会の最も基礎的な権力構造。性的抑圧はあらゆる抑圧の根底。制度の根本的解体を目指す。代表：ケイト・ミレット、ファイアストーン。批判：生物学的本質主義へ傾斜しやすい。TERF問題との接点。</p>
+        </div>
+        <div class="theory-card">
+          <p class="theory-card-label">Socialist Feminism</p>
+          <p class="theory-card-title">社会主義フェミニズム</p>
+          <p>ジェンダー抑圧は資本主義×家父長制の相互作用から生まれる。家事・育児・ケアは「不払い労働」として資本制を支えている。代表：上野千鶴子、フェデリッチ。批判：経済決定論リスク。</p>
+        </div>
+        <div class="theory-card">
+          <p class="theory-card-label">Intersectional Feminism</p>
+          <p class="theory-card-title">交差性フェミニズム</p>
+          <p>ジェンダー・人種・階級・セクシュアリティ等は相互に絡み合って特有の抑圧/特権を生む。1989年、キンバリー・クレンショーが提唱。第三波以降の主流的枠組み。批判：カテゴリ解体が連帯を困難にするという緊張。</p>
+        </div>
+      </div>
+
+      <h3>交差性（インターセクショナリティ）——クレンショーの問い</h3>
+      <p>キンバリー・クレンショーは1989年の論文「Demarginalizing the Intersection of Race and Sex」で交差性を提唱した。問題意識は実践的：当時のアメリカ反差別法制度が「人種差別」か「性差別」かの単一軸でしか処理できなかったため、黒人女性のように「両方」の差別を受ける人々の経験が法律の網の目からこぼれ落ちていた。</p>
+      <p>クレンショーの言葉：「交差性はプリズム。様々な不平等がどう機能し、互いを悪化させるかを見るためのもの。分断のための概念ではなく、より広範な連帯を実現するためのレンズだ」。</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Section 3: Movements and Practice -->
+    <section class="section">
+      <span class="section-number">Section 03</span>
+      <h2 class="section-title">運動と実践</h2>
+
+      <h3>#MeToo運動——フェミニズム史における位置づけ</h3>
+      <p>#MeToo には「二つの誕生」がある。<strong>2006年</strong>、タラナ・バークが非営利活動の中で黒人・貧困層の性暴力被害者支援として「me too.」を使い始めた。<strong>2017年10月</strong>、ハーヴェイ・ワインスタイン報道を受けた女優アリッサ・ミラノのツイートで世界的拡散。24時間でFacebook上に1200万以上の反応、世界85カ国以上に波及した。</p>
+      <p>意義：第四波の象徴として、性暴力を権力構造的問題として可視化し、「フェミニズムはもう不要」というポストフェミニズム的言説を反転させた。内部批判として、初期の注目が「裕福な白人シスジェンダー女性」に偏り、タラナ・バークの本来の趣旨（最も周縁化された人々への支援）が希薄化した問題がある。</p>
+
+      <h3>TERF論争——フェミニズム内部対立の構造</h3>
+      <p>TERF（Trans-Exclusionary Radical Feminist）は生物学的性別を固定のものとし、トランス女性を女性専用スペースから排除しようとする立場。起源は1970年代アメリカのラディカルフェミニズムの一部。2010年代以降イギリスを中心に勢力を拡大し、一部は保守・右派反LGBTQ運動と連携した。</p>
+      <p>対立の根底には「女性というカテゴリの定義」という根本問題と、本質主義 vs. 構築主義という哲学的亀裂がある。トランスインクルーシブ派は「TERF的立場はフェミニズムが批判してきた女性の本質化そのものだ」と指摘する。研究者の多数意見はトランスインクルーシブ側に近い。</p>
+
+      <h3>アライシップ——男性がフェミニズムに関わること</h3>
+      <p>「アライシップは肩書きではなく動詞」——アライとして行動し続けることが本質で、「自分はアライだ」と名乗ることではない。男性がフェミニズムに関わる際の留意点：自分で学ぶ（女性に教えてもらうことを前提にしない）、スペースを占拠しない、「Not All Men」を言わない、承認を求めない、指摘されたとき防衛的にならない。</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Section 4: Japan Context -->
+    <section class="section">
+      <span class="section-number">Section 04</span>
+      <h2 class="section-title">日本の文脈</h2>
+
+      <h3>受容史とバックラッシュ</h3>
+      <p>日本のフェミニズムは1920年代の婦選獲得運動（市川房枝ら）から始まり、1970年代のウーマン・リブ、1990年代の女性学の制度化へと展開した。転換点となったのは<strong>1999年の男女共同参画社会基本法</strong>施行。</p>
+      <p>施行直後から保守派によるジェンダー・バックラッシュが激化。「ジェンダーフリー＝中性化・家族破壊」という誤情報が意図的に流布され、自民党が主要拠点となった（江原由美子）。教科書から性の多様性に関する記述が削除され、図書館から関連書籍が消えた。バックラッシュは1990年代後半から2010年頃まで断続的に継続した。</p>
+      <p>「フェミ」の蔑称化は：バックラッシュが生んだ「フェミニスト＝過激」イメージ、田嶋陽子のテレビでの矮小化された消費、SNSの炎上構造、「フェミニズムはもう不要」という規範、の複合から生まれている。</p>
+
+      <h3>主要論者</h3>
+
+      <div class="person-block">
+        <p class="person-name">上野千鶴子</p>
+        <p class="person-meta">社会学者 / 東京大学名誉教授 / 1948年生</p>
+        <p>「資本制×家父長制の複合構造が近代産業社会に固有の女性差別を生み出す」という理論的骨格を構築。家事・育児を「不払い労働」として資本制との関係から分析した。近年は中国でも数百万回再生の現象的な影響力を持つ。主要著書：『家父長制と資本制』（1990）、『おひとりさまの老後』ほか。</p>
+      </div>
+
+      <div class="person-block">
+        <p class="person-name">田嶋陽子</p>
+        <p class="person-meta">英文学者 / 元法政大学教授 / 1941年生</p>
+        <p>視聴率20%以上のテレビ番組でフェミニズムを約2000万人に届けた「テレビ1人デモ」の実践者。「男らしさ/女らしさという社会的役割から解放され、一人の人間として自分を生きること」を一貫して主張。テレビ的消費の問題を経て、2019年以降に若い世代による再評価が進んでいる。</p>
+      </div>
+
+      <div class="person-block">
+        <p class="person-name">伊藤詩織</p>
+        <p class="person-meta">フリージャーナリスト / 1989年生</p>
+        <p>2017年に性被害を実名・顔出しで公表。著書『Black Box』（2017、9カ国語翻訳）で日本の性暴力・司法・警察・メディアの構造問題を記録した。民事訴訟で勝訴（2019年）。日本版 #MeToo の象徴であり、2023年刑法改正の社会的契機の一つ。2020年タイム誌「世界で最も影響力のある100人」選出。</p>
+      </div>
+
+      <h3>政策課題</h3>
+
+      <h4>ジェンダーギャップ指数（2025年版）</h4>
+      <p>日本は148カ国中<strong>118位</strong>（G7最下位、OECD加盟国ワースト2位）。</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>分野</th>
+            <th>スコア</th>
+            <th>順位</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>政治</td>
+            <td>0.085</td>
+            <td>125位</td>
+          </tr>
+          <tr>
+            <td>経済</td>
+            <td>0.613</td>
+            <td>112位</td>
+          </tr>
+          <tr>
+            <td>教育</td>
+            <td>0.994</td>
+            <td>66位</td>
+          </tr>
+          <tr>
+            <td>健康</td>
+            <td>0.973</td>
+            <td>50位</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top:1rem;">政治分野の後退が著しい。2024年発足の石破内閣で女性閣僚が2名（10%）に激減（前岸田内閣では25%）。管理職に占める女性割合は14.8%で127位。教育・健康分野での格差は小さいが、政治・経済での遅れが制度変革を阻んでいる。</p>
+
+      <h4>選択的夫婦別姓</h4>
+      <p>日本は民法750条により婚姻時の同一姓を強制する、世界でただ一国の国（2024年時点）。実態として95%以上の夫婦で女性が改姓。2023年世論調査では過半数が賛成するが、自民党内保守派が長年阻止してきた。2024年末から国会で議論が本格化している。</p>
+
+      <h4>性暴力法改正（2023年）</h4>
+      <p>明治時代以来110年ぶりの大改正。2023年6月16日全会一致で成立・7月施行。「不同意性交等罪」創設により、処罰の根拠が「暴行・脅迫の有無」から「相手の同意なく性的行為を行ったか否か」へと転換。性的同意年齢13歳→16歳に引き上げ、公訴時効10年→15年に延長、グルーミング行為の新規処罰も盛り込まれた。</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Section 5: Critiques and Responses -->
+    <section class="section">
+      <span class="section-number">Section 05</span>
+      <h2 class="section-title">批判と応答</h2>
+
+      <p>フェミニズムへの批判には「フェミニズム内部からの問い」「学術的・哲学的批判」「反フェミニズム（女性の権利への反対）」の三種があり、混同しないことが批判的思考の出発点になる。</p>
+
+      <h3>主要な批判とフェミニズムの応答</h3>
+
+      <div class="critique-item">
+        <p class="critique-claim">「生物学的差異論」——男女の違いは自然であり、社会的平等は自然に反する</p>
+        <p class="critique-response">フェミニズムが問うのは「差異の存在」ではなく「差異を根拠とした権力格差の正当化」。また「自然だから正しい」はis-ought問題（事実から規範は導けない）。生物学的差異が文化的に誇張・政治的に利用されてきた歴史を見過ごしている。</p>
+      </div>
+
+      <div class="critique-item">
+        <p class="critique-claim">「フェミニズムはもう不要」論——女性の権利はすでに十分獲得された</p>
+        <p class="critique-response">法的平等と実質的平等は別問題。GGI118位・管理職女性14.8%・性暴力被害の実態が解消を示していない。「不要論」が広まる文脈と、具体的データが示す現実の乖離を直視することが必要。</p>
+      </div>
+
+      <div class="critique-item">
+        <p class="critique-claim">「男性への逆差別」論——フェミニズムは男性を差別する</p>
+        <p class="critique-response">フェミニズムは「家父長制的なジェンダー規範から男性も解放する」という視点を含む。男性の孤独・感情抑圧・高自殺率はまさに家父長制的男性規範が生み出しているとフェミニズムは指摘する。フェミニズムへの反感を「男性の苦しみ」の解決策として提示することは、本来解決すべき問題から目をそらさせる。</p>
+      </div>
+
+      <div class="critique-item">
+        <p class="critique-claim">「フェミニズムは全女性を代表するか」——主流フェミニズムは特定集団の経験を普遍化している</p>
+        <p class="critique-response">最も重要なフェミニズム内部からの批判。交差性フェミニズムはこれへの応答として生まれた。「最も周縁化された人々の視点から出発することで構造的問題がより鮮明に見える」（クレンショー）。現代のフェミニズムの多くは多様な声の複数性を前提とし、連帯を共通の本質ではなく共通の政治的目的から組み直している。</p>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- Key Insights -->
+    <section class="section">
+      <span class="section-number">Synthesis</span>
+      <h2 class="section-title">総合的洞察</h2>
+
+      <div class="insight">
+        <p class="insight-label">Insight 01</p>
+        <p>フェミニズム内部の対立（第二波 vs. 交差性批判、TERF論争、本質主義/構築主義）は弱さではなく強さだ。自らを問い直し続けることで、より広く・深く・包括的な理論を構築してきた。「どのフェミニズムか」という問いを立てることが批判的思考の起点になる。</p>
+      </div>
+
+      <div class="insight">
+        <p class="insight-label">Insight 02</p>
+        <p>第二波が提示した「個人的なことは政治的なこと」は現代でも核心を突く。職場でのハラスメント、家庭内での家事分担、キャリアと出産の選択——これらは個人の問題に見えて、構造的な制度・規範・権力配置の産物だ。</p>
+      </div>
+
+      <div class="insight">
+        <p class="insight-label">Insight 03</p>
+        <p>日本の課題（GGI118位、夫婦別姓問題、性暴力法の遅れ）は「グローバルな問題の日本版」でもあるが、長期政権・保守的なジェンダー規範の根強さ・メディアの構造によって特有の形をとっている。上野千鶴子の「資本制×家父長制」という分析は日本の文脈でも有効な枠組みを提供している。</p>
+      </div>
+
+      <div class="insight">
+        <p class="insight-label">Insight 04</p>
+        <p>フェミニズムへの批判に接したとき：「この批判はフェミニズムの主張を正確に理解した上でのものか」「制度変革への反対か、理論的課題の指摘か」「この批判に応答することでフェミニズムはより豊かになるか」を問うことが、批判的思考の実践になる。</p>
+      </div>
+    </section>
+
+    <!-- References -->
+    <div class="references">
+      <h2>参照資料</h2>
+      <ol>
+        <li>IDEAS FOR GOOD「フェミニズムとは」<a href="https://ideasforgood.jp/glossary/feminism/">https://ideasforgood.jp/glossary/feminism/</a></li>
+        <li>Encyclopaedia Britannica「Intersectionality」<a href="https://www.britannica.com/topic/intersectionality">https://www.britannica.com/topic/intersectionality</a></li>
+        <li>Columbia Law School「Kimberlé Crenshaw on Intersectionality, More than Two Decades Later」<a href="https://www.law.columbia.edu/news/archive/kimberle-crenshaw-intersectionality-more-two-decades-later">リンク</a></li>
+        <li>Encyclopaedia Britannica「Me Too movement」<a href="https://www.britannica.com/topic/Me-Too-movement">https://www.britannica.com/topic/Me-Too-movement</a></li>
+        <li>Stanford Encyclopedia of Philosophy「Feminist Political Philosophy」<a href="https://plato.stanford.edu/entries/feminism-political/">https://plato.stanford.edu/entries/feminism-political/</a></li>
+        <li>国際協力NGOジョイセフ「ジェンダー・ギャップ指数2025」<a href="https://www.joicfp.or.jp/jpn/column/gggr2025/">https://www.joicfp.or.jp/jpn/column/gggr2025/</a></li>
+        <li>法務省「性犯罪関係の法改正等Q&amp;A」<a href="https://www.moj.go.jp/keiji1/keiji12_00200.html">https://www.moj.go.jp/keiji1/keiji12_00200.html</a></li>
+        <li>Diamond Online「政治家のジェンダー意識改革を止めた？2000年代の『バックラッシュ』とは」<a href="https://diamond.jp/articles/-/264604">https://diamond.jp/articles/-/264604</a></li>
+        <li>Wikipedia「Gender-critical feminism」「Feminist views on transgender topics」</li>
+        <li>Harvard Business Review「Men, Stop Calling Yourselves Allies. Act Like One.」(2022) <a href="https://hbr.org/2022/08/men-stop-calling-yourselves-allies-act-like-one">リンク</a></li>
+      </ol>
+    </div>
+
+    <footer class="report-footer">
+      <p>Personal Knowledge Vault &mdash; Haruka Ishiga &mdash; April 2026</p>
+    </footer>
+
+  </div>
+</body>
+</html>
