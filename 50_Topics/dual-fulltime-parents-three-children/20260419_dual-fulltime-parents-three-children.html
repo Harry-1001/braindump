@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3児の母 × 共働きフルタイムの忙しさ</title>
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --white: #fafafa;
+      --gray-100: #f2f2f2;
+      --gray-200: #e0e0e0;
+      --gray-400: #999;
+      --gray-600: #555;
+      --gray-800: #222;
+      --accent: #0a0a0a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--black);
+      background: var(--white);
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 60px 32px 120px;
+    }
+
+    header {
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 24px;
+      margin-bottom: 48px;
+    }
+
+    .meta {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .summary-box {
+      background: var(--gray-100);
+      border-left: 3px solid var(--black);
+      padding: 20px 24px;
+      margin: 0 0 48px;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    h2 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-top: 1px solid var(--black);
+      padding-top: 12px;
+      margin: 56px 0 20px;
+      color: var(--gray-600);
+    }
+
+    h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin: 28px 0 10px;
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      margin-bottom: 14px;
+      color: var(--gray-800);
+    }
+
+    ul, ol {
+      padding-left: 1.4em;
+      margin-bottom: 14px;
+    }
+
+    li {
+      margin-bottom: 5px;
+      color: var(--gray-800);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 14px;
+    }
+
+    th {
+      background: var(--black);
+      color: var(--white);
+      padding: 8px 12px;
+      text-align: left;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    tr:nth-child(even) td {
+      background: var(--gray-100);
+    }
+
+    .stat {
+      display: inline-block;
+      background: var(--black);
+      color: var(--white);
+      font-size: 22px;
+      font-weight: 700;
+      padding: 4px 10px;
+      margin: 2px 0;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-left: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin: 20px 0 28px;
+    }
+
+    .stat-item {
+      flex: 1;
+      min-width: 140px;
+      border-top: 2px solid var(--black);
+      padding-top: 10px;
+    }
+
+    .stat-item .num {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-item .label {
+      font-size: 11px;
+      color: var(--gray-600);
+      letter-spacing: 0.06em;
+    }
+
+    .insight {
+      border: 1px solid var(--black);
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    .insight strong {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 6px;
+    }
+
+    .timeline {
+      border-left: 2px solid var(--gray-200);
+      margin: 16px 0;
+      padding-left: 20px;
+    }
+
+    .timeline-item {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .timeline-item .time {
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--gray-400);
+      letter-spacing: 0.06em;
+      display: block;
+    }
+
+    .sources {
+      border-top: 1px solid var(--gray-200);
+      margin-top: 64px;
+      padding-top: 20px;
+    }
+
+    .sources h4 {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 10px;
+    }
+
+    .sources a {
+      display: block;
+      color: var(--gray-600);
+      text-decoration: none;
+      font-size: 12px;
+      margin-bottom: 4px;
+      border-bottom: none;
+    }
+
+    .sources a:hover {
+      color: var(--black);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--gray-200);
+      margin: 40px 0;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 32px 20px 80px; }
+      h1 { font-size: 22px; }
+      .stat-row { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <p class="meta">Research Report &nbsp;/&nbsp; 2026-04-19 &nbsp;/&nbsp; dual-fulltime-parents-three-children</p>
+  <h1>3児の母 × 共働きフルタイムの忙しさ</h1>
+</header>
+
+<div class="summary-box">
+  3人の子どもを持ち夫婦ともフルタイムで働く家庭は、時間・体力・認知負荷の三重の枯渇にさらされている。家事・育児の分担は依然として母親に偏り（家事52%・育児51%が「主に妻」）、さらに「見えない管理業務（メンタルロード）」も母親に集中する。3人目が生まれると複雑度は線形以上に増し、60%以上の親が「3人目の壁」を実感する。この状況は個人の努力で解決できる問題ではなく、構造的な過負荷として設計されている。
+</div>
+
+
+<h2>01 &nbsp; 時間・体力の実態</h2>
+
+<h3>1日のタイムライン</h3>
+
+<div class="timeline">
+  <div class="timeline-item">
+    <span class="time">5:30 – 6:30</span>
+    起床・朝食準備・自分の支度
+  </div>
+  <div class="timeline-item">
+    <span class="time">6:30 – 8:00</span>
+    子ども3人分の起こし・着替え・食事・登園/登校準備
+  </div>
+  <div class="timeline-item">
+    <span class="time">8:00 – 18:00</span>
+    通勤・就労（途中でお迎え対応が入ることも）
+  </div>
+  <div class="timeline-item">
+    <span class="time">18:00 – 21:00</span>
+    夕食準備・食事・入浴・宿題対応・兄弟ケンカ調停
+  </div>
+  <div class="timeline-item">
+    <span class="time">21:00 – 22:00</span>
+    3人分の就寝対応
+  </div>
+  <div class="timeline-item">
+    <span class="time">22:00 – 深夜</span>
+    家事残業・翌日準備・わずかな個人時間（→睡眠不足に直結）
+  </div>
+</div>
+
+<h3>睡眠の実態</h3>
+
+<div class="stat-row">
+  <div class="stat-item">
+    <div class="num">43.6%</div>
+    <div class="label">30〜40代女性で睡眠6時間未満（2023年 国民健康・栄養調査）</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">42.5%</div>
+    <div class="label">子育て負担感の最多回答「自分の自由な時間が持てない」（文科省調査）</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">60%</div>
+    <div class="label">3人以上を持つ親が「3人目の壁を感じた」（kufura調査）</div>
+  </div>
+</div>
+
+<div class="insight">
+  <strong>Key Finding</strong>
+  「2人と3人は全然違う」は感覚ではなく実態。年齢差のある3人が同居すると乳幼児・幼稚園・小学校の世界が同時進行し、習い事・行事・宿題が3系統で並走する。調整コストは線形ではなく指数的に増加する。
+</div>
+
+
+<h2>02 &nbsp; 家事・育児の分担実態</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>項目</th>
+      <th>主に妻</th>
+      <th>夫婦平等</th>
+      <th>主に夫</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>家事</td>
+      <td><strong>52.6%</strong>（子あり56.7%）</td>
+      <td>25.0%</td>
+      <td>15.4%</td>
+    </tr>
+    <tr>
+      <td>育児</td>
+      <td><strong>51.8%</strong></td>
+      <td>33.7%</td>
+      <td>7.5%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>出典：ソニー生命「20代・30代共働き夫婦の生活意識調査2025」（n=1,000）</p>
+
+<h3>週あたり家事時間のギャップ</h3>
+
+<div class="stat-row">
+  <div class="stat-item">
+    <div class="num">391分</div>
+    <div class="label">妻の週あたり家事時間</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">114分</div>
+    <div class="label">夫の週あたり家事時間</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">3.4倍</div>
+    <div class="label">妻は夫の何倍か（6歳未満の子がいる共働き世帯）</div>
+  </div>
+</div>
+
+<h3>「わかってはいる、でも変わらない」構造</h3>
+
+<p>夫の<strong>63.4%</strong>が「自分がもっと担うべき」と認識している。にもかかわらず実態は変わらない。</p>
+
+<ul>
+  <li>職場の長時間労働規範（夫が帰れない）</li>
+  <li>「母親がやるべき」という社会的スクリプト</li>
+  <li>一度ルーティン化すると変更コストが高い</li>
+</ul>
+
+<div class="insight">
+  <strong>Invisible Work</strong>
+  特に母親に集中するのは「見えないタスク」——病院予約、学校書類処理、食材在庫管理、献立決定、子どもの持ち物管理。これらはタスクそのものより「管理していること」自体がメンタルロードを生む。
+</div>
+
+
+<h2>03 &nbsp; 意思決定・認知負荷（メンタルロード）</h2>
+
+<h3>メンタルロードとは</h3>
+
+<p>「実際に手を動かす前段階にある、考える・気づく・計画する負担」。物理的タスクを分担しても、メンタルロード（管理・判断・段取り）はほぼ移転しない。</p>
+
+<h3>疲労が引き起こす連鎖</h3>
+
+<ol>
+  <li><strong>判断力の低下</strong> — 「今夜の夕食」すら決められない「決断疲れ」</li>
+  <li><strong>感情コントロールの難化</strong> — 子ども・配偶者への八つ当たり</li>
+  <li><strong>長期思考の困難化</strong> — キャリアや人生の設計を後回しにする</li>
+</ol>
+
+<p>3人分のメンタルロードを担い続けることで、この状態が常態化するリスクがある。</p>
+
+
+<h2>04 &nbsp; 外部リソース・サービスの活用</h2>
+
+<h3>市場規模</h3>
+
+<ul>
+  <li>ミールキット：2024年 約<strong>1,900億円</strong>（共働き世帯が主要顧客）</li>
+  <li>家事代行：富裕層向けから普及サービスへ移行中</li>
+</ul>
+
+<h3>利用されない理由</h3>
+
+<table>
+  <thead>
+    <tr><th>障壁</th><th>回答率</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>高いから</td><td>64.6%</td></tr>
+    <tr><td>他人にキッチンを使われるのが嫌</td><td>42.9%</td></tr>
+    <tr><td>ちゃんとやっていない母親に見られる恐れ</td><td>（定性的・多数）</td></tr>
+    <tr><td>手配自体がメンタルロードを増やす</td><td>（構造的問題）</td></tr>
+  </tbody>
+</table>
+
+
+<h2>05 &nbsp; キャリア・アイデンティティ</h2>
+
+<h3>管理職志向の変化</h3>
+
+<table>
+  <thead>
+    <tr><th>時期</th><th>管理職志向</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>出産前</td><td>19.6%</td></tr>
+    <tr><td>子ども3歳未満</td><td><strong>7.7%</strong>（最低点）</td></tr>
+    <tr><td>子ども小学生以降</td><td>17.3%（回復）</td></tr>
+    <tr><td>5〜10年後展望</td><td>20〜23.7%</td></tr>
+  </tbody>
+</table>
+
+<p>出典：パーソル総合研究所「ワーキングマザー調査」（2019）</p>
+
+<div class="stat-row">
+  <div class="stat-item">
+    <div class="num">40%</div>
+    <div class="label">「職場内対話無力感」を経験するワーキングマザー</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">49.7%</div>
+    <div class="label">WLBが取れていると感じる人（半数以下）</div>
+  </div>
+</div>
+
+<h3>キャリア喪失のメカニズム（第一生命経済研究所 事例研究）</h3>
+
+<ol>
+  <li><strong>育休長期化</strong> → 昇格2年遅れ</li>
+  <li><strong>時短勤務 × 役職のミスマッチ</strong> → マミートラック化</li>
+  <li><strong>長時間労働職場</strong> → 体調悪化 → 退職</li>
+</ol>
+
+<div class="insight">
+  <strong>Key Insight</strong>
+  キャリア喪失は「やる気の問題」ではなく「制度・職場環境の構造問題」。成功事例に共通するのは「週1回の上司1on1」と「段階的キャリア形成の明示」。
+</div>
+
+
+<h2>06 &nbsp; 総合的な示唆</h2>
+
+<h3>この層が直面しているのは「選択の問題」ではない</h3>
+
+<p>「うまくやれない」「効率が悪い」のではなく、構造的に過負荷が設計されている状態。個人の努力や工夫で解決できる限界がある。</p>
+
+<h3>ペインポイントの優先度</h3>
+
+<ol>
+  <li><strong>時間の絶対的不足</strong> — 可処分時間がほぼゼロ</li>
+  <li><strong>メンタルロードの非対称性</strong> — 母親への集中</li>
+  <li><strong>外部サービス活用のハードル</strong> — コスト・心理的障壁</li>
+  <li><strong>キャリアとの葛藤</strong> — 諦めか継続かの二項対立</li>
+</ol>
+
+<h3>サービス設計・支援に活かすなら</h3>
+
+<ul>
+  <li>「時間を買う」より「<strong>判断を減らす</strong>」方向のデザインが有効</li>
+  <li>心理的ハードル（評価恐怖）を下げるコミュニケーションが必要</li>
+  <li>母親個人でなく「<strong>家庭単位</strong>」でのアプローチが機能しやすい</li>
+</ul>
+
+
+<div class="sources">
+  <h4>Sources</h4>
+  <a href="https://www.sonylife.co.jp/company/news/2024/nr_250128.html">ソニー生命「20代・30代共働き夫婦の生活意識調査2025」</a>
+  <a href="https://rc.persol-group.co.jp/thinktank/data/working-mother.html">パーソル総合研究所「ワーキングマザー調査」</a>
+  <a href="https://www.dlri.co.jp/report/ld/551344.html">第一生命経済研究所「ワーキングマザーがキャリアをあきらめるとき」</a>
+  <a href="https://kufura.jp/family/childcare/460241">kufura「3人目の壁はあった？」</a>
+  <a href="https://prtimes.jp/main/html/rd/p/000000020.000035568.html">日本能率協会総合研究所「ミールキット市場2024」</a>
+  <a href="https://seikatsusyukanbyo.com/statistics/2024/010828.php">国民健康・栄養調査2023（厚労省）</a>
+  <a href="https://www.stat.go.jp/info/today/pdf/190.pdf">社会生活基本調査「家事関連時間の男女差」</a>
+</div>
+
+</body>
+</html>

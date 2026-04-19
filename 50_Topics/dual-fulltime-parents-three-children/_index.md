@@ -1,8 +1,9 @@
 ---
 title: 3児の母 × 共働きフルタイムの忙しさ
-status: planned
-tags: [topic/dual-fulltime-parents-three-children, status/planned]
+status: active
+tags: [topic/dual-fulltime-parents-three-children, status/active]
 created: 2026-04-19
+updated: 2026-04-19
 ---
 
 # 3児の母 × 共働きフルタイムの忙しさ
@@ -44,16 +45,37 @@ created: 2026-04-19
 
 ## Findings
 
-*未実施*
+- **時間・体力**：3児フルタイム共働き家庭の可処分時間はほぼゼロ。女性の40代・30代の43.6%が睡眠6時間未満。3人目で複雑度は線形以上に増加し、60%の親が「3人目の壁を感じた」と回答。
+- **家事育児分担**：「主に妻」が家事52.6%・育児51.8%。6歳未満の子がいる共働き世帯で妻の家事時間は夫の3.4倍（週391分 vs 114分）。夫の63.4%が「もっと担うべき」と認識しながら実態は変わらない構造的矛盾。
+- **メンタルロード**：「考える・気づく・計画する」見えない管理業務が母親に集中。物理的タスクを分担してもメンタルロードは移転しない。慢性的疲労が決断力・感情コントロール・長期思考を蝕む連鎖が生じる。
+- **外部サービス**：ミールキット市場は2024年に1,900億円規模に。ただし家事代行は「高い」（64.6%）「プライバシー」（42.9%）「手配自体が負担」という障壁で普及が限定的。
+- **キャリア**：管理職志向は子ども3歳未満で7.7%まで低下（出産前19.6%）後に回復するが、マミートラックに入ると回復困難。約40%が「職場内対話無力感」を経験。WLBが取れていると感じるのは49.7%のみ。
+
+## Output
+
+- [[20260419_dual-fulltime-parents-three-children]] — メインレポート（MD）
+- [[20260419_dual-fulltime-parents-three-children.html]] — HTMLレポート
+
+## Notes
+
+- [[notes/time-physical-capacity]] — 時間・体力の実態
+- [[notes/household-division]] — 家事・育児の分担実態
+- [[notes/mental-load-decisions]] — 意思決定・認知負荷・メンタルロード
+- [[notes/external-services]] — 外部リソース・サービス依存の実態
+- [[notes/career-identity]] — キャリア・アイデンティティの葛藤
 
 ---
 
 ## Related Topics
 
-*なし*
+*なし（今後追加予定）*
 
 ---
 
 ## Resources
 
-*未収集*
+- [[references/sonylife-2025-survey]] — ソニー生命「20代・30代共働き夫婦の生活意識調査2025」
+- [[references/persol-working-mother]] — パーソル総研「ワーキングマザー調査」
+- [[references/dlri-career-loss]] — 第一生命経済研究所「キャリアをあきらめるとき」
+- [[references/kufura-three-kids]] — kufura「3人目の壁はあった？」
+- [[references/mealkit-market-2024]] — 日本能率協会総研「ミールキット市場2024」
